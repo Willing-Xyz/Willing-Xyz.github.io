@@ -1,0 +1,743 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="View绘制流程
+measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。
+
+layout：用于设置View在屏幕上显示的位置。
+
+draw：将View显示在屏幕上
+
+绘制背景
+如果要视图显示渐变框，这里会做一些准备工作
+绘制视图本身，即调用onDraw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="View/ViewGroup的绘制流程与它们的自定义">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/index.html">
+<meta property="og:site_name" content="Willing Xyz's Blog">
+<meta property="og:description" content="View绘制流程
+measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。
+
+layout：用于设置View在屏幕上显示的位置。
+
+draw：将View显示在屏幕上
+
+绘制背景
+如果要视图显示渐变框，这里会做一些准备工作
+绘制视图本身，即调用onDraw">
+<meta property="og:image" content="http://img0.ph.126.net/DXGaaOijobE1WBRfc7mmfg==/1113515007885482097.png">
+<meta property="og:image" content="http://img0.ph.126.net/cwasDHjmQiLbGgqXV2TlOg==/6630420153351966156.png">
+<meta property="og:updated_time" content="2015-11-28T19:03:33.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="View/ViewGroup的绘制流程与它们的自定义">
+<meta name="twitter:description" content="View绘制流程
+measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。
+
+layout：用于设置View在屏幕上显示的位置。
+
+draw：将View显示在屏幕上
+
+绘制背景
+如果要视图显示渐变框，这里会做一些准备工作
+绘制视图本身，即调用onDraw">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'always',
+    motion: true
+  };
+</script>
+
+  <title> View/ViewGroup的绘制流程与它们的自定义 | Willing Xyz's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Willing Xyz's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Are you kidding me?</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                View/ViewGroup的绘制流程与它们的自定义
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-29T03:02:29+08:00" content="2015-11-29">
+              2015-11-29
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/View-ViewGroup的绘制流程与它们的自定义/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="View绘制流程">View绘制流程</h2><ol>
+<li><p>measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。<br><img src="http://img0.ph.126.net/DXGaaOijobE1WBRfc7mmfg==/1113515007885482097.png" alt="此处输入图片的描述"></p>
+</li>
+<li><p>layout：用于设置View在屏幕上显示的位置。</p>
+</li>
+<li><p>draw：将View显示在屏幕上</p>
+<ol>
+<li>绘制背景</li>
+<li>如果要视图显示渐变框，这里会做一些准备工作</li>
+<li>绘制视图本身，即调用onDraw()函数。</li>
+<li>如果是ViewGroup，则绘制子视图，即dispatchDraw()函数。</li>
+<li>如果需要（应用程序调用了setVerticalFadingEdge或者setHorizontalFadingEdge），开始绘制渐变框；</li>
+<li>绘制滚动条；</li>
+</ol>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="requestLayout和invalidate的区别">requestLayout和invalidate的区别</h2><p><img src="http://img0.ph.126.net/cwasDHjmQiLbGgqXV2TlOg==/6630420153351966156.png" alt="此处输入图片的描述"></p>
+<p>invalidate和requestLayout方法的调用都会向上传递，导致整棵View树被重绘或者重新布局。</p>
+<h2 id="自定义View/ViewGroup">自定义View/ViewGroup</h2><ol>
+<li>自定义View属性（可选）</li>
+<li>在自定义View类的构造方法中获取自定义的属性值（可选）</li>
+<li>实现onMeasure方法</li>
+<li>实现onLayout方法（自定义ViewGroup需要实现此方法，自定义View不需要）</li>
+<li>实现onDraw方法（自定义View需要，自定义ViewGroup不需要）</li>
+</ol>
+<h3 id="1-_在res/values目录下创建xml文件，并定义属性值">1. 在res/values目录下创建xml文件，并定义属性值</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">declare-styleable</span> <span class="attribute">name</span>=<span class="value">"Customize"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"attr_one"</span> <span class="attribute">format</span>=<span class="value">"string"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"attr_two"</span> <span class="attribute">format</span>=<span class="value">"string"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"attr_three"</span> <span class="attribute">format</span>=<span class="value">"string"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"attr_four"</span> <span class="attribute">format</span>=<span class="value">"string"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">declare-styleable</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="tag">&lt;<span class="title">attr</span> <span class="attribute">name</span>=<span class="value">"CustomizeStyle"</span> <span class="attribute">format</span>=<span class="value">"reference"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">resources</span>&gt;</span></span><br><span class="line">// R.java</span><br><span class="line">public static final int[] Customize = &#123;</span><br><span class="line">    0x7f010034, 0x7f010035, 0x7f010036, 0x7f010037</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>既可以使用attr定义属性，也可以包含在declare-styleable中。<br>区别在于，包含在declare-styleable中，会自动生成一个名为Customize的int数组，其中包含内部attr声明的值。<br>这样就可以直接作为Context.obtainStyledAttributes的第二个参数，否则要自己根据attr构建数组。<br>在该xml文件中，设置属性和声明属性 , 也可以声明系统属性，如<attr name="android:text"> , 此时不需要声明format，然后在类中这么获取：ta.getString(R.styleable.test_android_text);<br>布局文件中直接android:text=”@string/hello_world”即可。</attr></p>
+<h4 id="支持的类型">支持的类型</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">可以指定多种属性，用|分隔。</span><br><span class="line">	* <span class="keyword">reference</span> </span><br><span class="line">	* color : <span class="comment">#00ff00</span></span><br><span class="line">	* <span class="type">boolean</span></span><br><span class="line">	* dimension : <span class="number">44</span>dp</span><br><span class="line">	* float</span><br><span class="line">	* <span class="type">integer</span></span><br><span class="line">	* <span class="type">string</span></span><br><span class="line">	* fraction （百分比）</span><br><span class="line">	* enum </span><br><span class="line">&lt;declare-styleable <span class="property">name</span>=<span class="string">" 名称"</span>&gt;</span><br><span class="line">    &lt;attr <span class="property">name</span> =<span class="string">"orientation"</span>&gt;</span><br><span class="line">        &lt;enum <span class="property">name</span> =<span class="string">"horizontal"</span> value =<span class="string">"0"</span> /&gt;</span><br><span class="line">        &lt;enum <span class="property">name</span> =<span class="string">"vertical"</span> value =<span class="string">"1"</span> /&gt;</span><br><span class="line">    &lt;/attr &gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	* flag （位或运算）</span><br><span class="line">&lt;declare-styleable <span class="property">name</span>= <span class="string">"名称"</span>&gt;</span><br><span class="line">    &lt;attr <span class="property">name</span>=<span class="string">"windowSoftInputMode"</span> &gt;</span><br><span class="line">        &lt;flag <span class="property">name</span> =<span class="string">"adjustUnspecified"</span> value=<span class="string">"0x00"</span> /&gt;</span><br><span class="line">        &lt;flag <span class="property">name</span> =<span class="string">"adjustResize"</span> value=<span class="string">"0x10"</span> /&gt;</span><br><span class="line">    &lt;/attr&gt;</span><br><span class="line">&lt;/declare-styleable&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-_在构造函数中获取属性的值">2. 在构造函数中获取属性的值</h3><p>如果在Code中实例化一个View会调用第一个构造函数，如果在xml中定义会调用第二个构造函数，而第三个函数系统是不调用的，要由其它的构造函数显示调用。<br><figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TypedArray a = context.obtainStyledAttributes(attrs, <span class="keyword">R</span>.styleable.Customize, defStyle, <span class="keyword">R</span>.style.DefaultCustomizeStyle);</span><br><span class="line">String one = a.getString(<span class="keyword">R</span>.styleable.Customize_attr_one);</span><br><span class="line">String two = a.getString(<span class="keyword">R</span>.styleable.Customize_attr_two);</span><br></pre></td></tr></table></figure></p>
+<p>obtainStyledAttributes函数第三个参数，也就是构造函数的第三个参数，它的值为一个属性值，如<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#35813;&#23646;&#24615;&#30340;&#20540;&#24212;&#35813;&#22312;Theme&#20013;&#23450;&#20041;&#12290;&#10;obtainStyledAttributes&#20989;&#25968;&#31532;&#22235;&#20010;&#21442;&#25968;&#65292;&#23427;&#30340;&#20540;&#20026;&#19968;&#20010;style&#65292;&#22914;```R.style.DefaultCustomizeStyle```&#12290;&#10;&#10;#### **&#23646;&#24615;&#30340;&#20960;&#31181;&#20351;&#29992;&#26041;&#24335;&#21644;&#20248;&#20808;&#32423;**&#10;&#10;1. &#30452;&#25509;&#22312;layout&#20013;&#20351;&#29992;&#23646;&#24615;&#10;2. &#35774;&#32622;style&#24182;&#22312;style&#20013;&#35774;&#32622;&#23646;&#24615;&#10;3. theme&#20013;&#25351;&#23450;&#22312;&#24403;&#21069;Application&#25110;Activity&#20013;&#23646;&#24615;&#30340;&#40664;&#35748;&#20540;&#10;    - &#30452;&#25509;&#25351;&#23450;&#23646;&#24615;&#20540;&#10;    - &#24341;&#29992;style&#65288;&#21363;&#26500;&#36896;&#20989;&#25968;&#30340;&#31532;&#19977;&#20010;&#21442;&#25968;&#65289;&#10;&#10;**&#20248;&#20808;&#32423;&#65306;**&#10;&#30452;&#25509;&#22312;XML&#20013;&#23450;&#20041; &#62; &#24067;&#23616;&#25991;&#20214;&#20013;&#30340;style&#23450;&#20041; &#62; &#30001;defStyleAttr&#23450;&#20041; &#62; defStyleRes&#25351;&#23450;&#30340;&#40664;&#35748;&#20540; &#62; &#30452;&#25509;&#22312;Theme&#20013;&#25351;&#23450;&#30340;&#20540;&#10;&#20854;&#20013;&#65292;&#22914;&#26524;defStyleAttr&#30340;&#20540;&#19981;&#20026;0&#19988;&#22312;theme&#20013;&#20026;&#20854;&#36171;&#36807;&#20540;&#65292;&#21017;defStyleRes&#19981;&#36215;&#20316;&#29992;&#65292;&#21363;&#20351;&#22312;defStyleAttr&#20013;&#25214;&#19981;&#21040;&#23545;&#24212;&#30340;&#20540;&#12290;&#10;    &#10;### 3. &#23454;&#29616;onMeasure&#26041;&#27861;</span><br></pre></td></tr></table></figure></p>
+<p>protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)<br>{<br>    int widthMode = MeasureSpec.getMode(widthMeasureSpec);<br>    int widthSize = MeasureSpec.getSize(widthMeasureSpec);<br>    int heightMode = MeasureSpec.getMode(heightMeasureSpec);<br>    int heightSize = MeasureSpec.getSize(heightMeasureSpec);<br>    // ………..<br>    // (自定义ViewGroup时调用)measureChildren(widthMeasureSpec, heightMeasureSpec);  或者measureChild(child, widthMeasureSpec, heightMeasureSpec);<br>    setMeasuredDimension(width, height);<br>}<br>```<br>其中Mode有三个值：<br>EXACTLY：表示View的大小应该为上面获取的Size的大小<br>AT_MOST：表示View的大小最大为Size的大小<br>UNSPECIFIED：表示View的大小可以随意指定</p>
+<p>最后，必须调用setMeasuredDimension方法设置测量的值。<br>该方法被调用后，Mesaured width/height的值就可以被获取了。</p>
+<p>此外应该确保measure height and width 至少是getSuggestedMinimumHeight/getSuggestedMinimumWidth。</p>
+<p>对于ViewGroup，需要调用measureChildren以测量孩子们的大小，并根据孩子们的大小来计算自己的大小。<br>并且，至少要考虑margin的大小，可遍历每个child，并调用measureChild测量它们的大小，再调用child.getLayoutParams();获取LayoutParams。</p>
+<h3 id="4-_实现onLayout方法（自定义ViewGroup实现）">4. 实现onLayout方法（自定义ViewGroup实现）</h3><p>自定义View不需要实现该方法，因为View的位置是有包含它的ViewGroup指定的。</p>
+<p>自定义ViewGroup在该方法中指定children的位置，通过调用child的layout方法。<br>自定义ViewGroup的宽和高应该从onLayout方法的参数获取，而不是使用Measure width/height。</p>
+<h3 id="5-_实现onDraw方法（自定义View实现）">5. 实现onDraw方法（自定义View实现）</h3><p>对于ViewGroup则不需要实现该函数，因为作为容器是“没有内容“的，其包含了多个子view，而子View已经实现了自己的绘制方法。</p>
+<p>自定义View的宽和高应该调用getWidth和getHeight获取，而不是使用Measure width/height。<br>要考虑padding的大小，根据需要是否绘制到Padding的内部。<br>在onDraw方法中，不要创建对象，这样会消耗大量内存。</p>
+<h2 id="待解决">待解决</h2><ul>
+<li>自定义LayoutParams</li>
+</ul>
+<h2 id="参考">参考</h2><p><a href="http://www.cnblogs.com/angeldevil/p/3479431.html" target="_blank" rel="external">Android中自定义样式与View的构造函数中的第三个参数defStyle的意义 </a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/29/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/29/View-ViewGroup的绘制流程与它们的自定义/"
+           data-title="View/ViewGroup的绘制流程与它们的自定义" data-url="http://yoursite.com/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.jpg" alt="Willing Xyz" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Willing Xyz</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">此时正当修行时</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Willing-Xyz" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View绘制流程"><span class="nav-number">1.</span> <span class="nav-text">View绘制流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requestLayout和invalidate的区别"><span class="nav-number">2.</span> <span class="nav-text">requestLayout和invalidate的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义View/ViewGroup"><span class="nav-number">3.</span> <span class="nav-text">自定义View/ViewGroup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_在res/values目录下创建xml文件，并定义属性值"><span class="nav-number">3.1.</span> <span class="nav-text">1. 在res/values目录下创建xml文件，并定义属性值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#支持的类型"><span class="nav-number">3.1.1.</span> <span class="nav-text">支持的类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_在构造函数中获取属性的值"><span class="nav-number">3.2.</span> <span class="nav-text">2. 在构造函数中获取属性的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_实现onLayout方法（自定义ViewGroup实现）"><span class="nav-number">3.3.</span> <span class="nav-text">4. 实现onLayout方法（自定义ViewGroup实现）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_实现onDraw方法（自定义View实现）"><span class="nav-number">3.4.</span> <span class="nav-text">5. 实现onDraw方法（自定义View实现）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#待解决"><span class="nav-number">4.</span> <span class="nav-text">待解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Willing Xyz</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"willing-xyz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
