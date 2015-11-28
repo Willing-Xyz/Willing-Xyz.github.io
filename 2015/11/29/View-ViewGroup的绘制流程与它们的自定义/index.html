@@ -75,9 +75,10 @@ draw：将View显示在屏幕上
 绘制背景
 如果要视图显示渐变框，这里会做一些准备工作
 绘制视图本身，即调用onDraw">
-<meta property="og:image" content="http://img0.ph.126.net/DXGaaOijobE1WBRfc7mmfg==/1113515007885482097.png">
-<meta property="og:image" content="http://img0.ph.126.net/cwasDHjmQiLbGgqXV2TlOg==/6630420153351966156.png">
-<meta property="og:updated_time" content="2015-11-28T19:03:33.405Z">
+<meta property="og:image" content="http://yoursite.com/./images/view-measure.png">
+<meta property="og:image" content="http://yoursite.com/./images/view-layout.png">
+<meta property="og:image" content="http://yoursite.com/./images/invalidate-requestlayout.png">
+<meta property="og:updated_time" content="2015-11-28T19:32:05.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="View/ViewGroup的绘制流程与它们的自定义">
 <meta name="twitter:description" content="View绘制流程
@@ -96,7 +97,7 @@ draw：将View显示在屏幕上
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: '',
-    sidebar: 'always',
+    sidebar: 'hide',
     motion: true
   };
 </script>
@@ -282,9 +283,9 @@ draw：将View显示在屏幕上
 
       
         <span itemprop="articleBody"><h2 id="View绘制流程">View绘制流程</h2><ol>
-<li><p>measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。<br><img src="http://img0.ph.126.net/DXGaaOijobE1WBRfc7mmfg==/1113515007885482097.png" alt="此处输入图片的描述"></p>
+<li><p>measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。<br><img src="./images/view-measure.png" alt="measure"></p>
 </li>
-<li><p>layout：用于设置View在屏幕上显示的位置。</p>
+<li><p>layout：用于设置View在屏幕上显示的位置。<br><img src="./images/view-layout.png" alt="layout"></p>
 </li>
 <li><p>draw：将View显示在屏幕上</p>
 <ol>
@@ -298,7 +299,7 @@ draw：将View显示在屏幕上
 </li>
 </ol>
 <a id="more"></a>
-<h2 id="requestLayout和invalidate的区别">requestLayout和invalidate的区别</h2><p><img src="http://img0.ph.126.net/cwasDHjmQiLbGgqXV2TlOg==/6630420153351966156.png" alt="此处输入图片的描述"></p>
+<h2 id="requestLayout和invalidate的区别">requestLayout和invalidate的区别</h2><p><img src="./images/invalidate-requestlayout.png" alt=""></p>
 <p>invalidate和requestLayout方法的调用都会向上传递，导致整棵View树被重绘或者重新布局。</p>
 <h2 id="自定义View/ViewGroup">自定义View/ViewGroup</h2><ol>
 <li>自定义View属性（可选）</li>
@@ -337,20 +338,6 @@ draw：将View显示在屏幕上
         </div>
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/11/29/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
       
 
       
@@ -419,7 +406,7 @@ draw：将View显示在屏幕上
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -433,7 +420,7 @@ draw：将View显示在屏幕上
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
