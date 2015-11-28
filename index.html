@@ -51,22 +51,22 @@
 
 
 
-<meta name="description" content="Are you kidding me?">
+<meta name="description" content="此时正当修行时">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Willing Xyz's Blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="Willing Xyz's Blog">
-<meta property="og:description" content="Are you kidding me?">
+<meta property="og:description" content="此时正当修行时">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Willing Xyz's Blog">
-<meta name="twitter:description" content="Are you kidding me?">
+<meta name="twitter:description" content="此时正当修行时">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: '',
-    sidebar: 'post',
+    sidebar: 'always',
     motion: true
   };
 </script>
@@ -155,6 +155,26 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
 
       
       
@@ -177,294 +197,15 @@
 
     
     
+      
+      
+        
+        
+        
+      
 
+      
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/29/hello-test/" itemprop="url">
-                  hello test
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T02:07:37+08:00" content="2015-11-29">
-              2015-11-29
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>sdfhjkpublic class ImageAdapter extends ArrayAdapter<string> {</string></p>
-<pre><code><span class="keyword">private</span> <span class="type">ListView</span> mListView; 
-
-......
-
-<span class="annotation">@Override</span>
-public <span class="type">View</span> getView(int position, <span class="type">View</span> convertView, <span class="type">ViewGroup</span> parent) {
-    <span class="keyword">if</span> (mListView == <span class="literal">null</span>) {  
-        mListView = (<span class="type">ListView</span>) parent;  
-    } 
-
-    <span class="type">String</span> url = getItem(position);
-    <span class="type">View</span> view;
-    <span class="keyword">if</span> (convertView == <span class="literal">null</span>) {
-        view = <span class="type">LayoutInflater</span>.from(getContext()).inflate(<span class="type">R</span>.layout.image_item, <span class="literal">null</span>);
-    } <span class="keyword">else</span> {
-        view = convertView;
-    }
-    <span class="type">ImageView</span> image = (<span class="type">ImageView</span>) view.findViewById(<span class="type">R</span>.id.image);
-    image.setImageResource(<span class="type">R</span>.drawable.empty_photo);
-    image.setTag(url);
-    <span class="type">BitmapDrawable</span> drawable = getBitmapFromMemoryCache(url);
-    <span class="keyword">if</span> (drawable != <span class="literal">null</span>) {
-        image.setImageDrawable(drawable);
-    } <span class="keyword">else</span> {
-        <span class="type">BitmapWorkerTask</span> task = <span class="keyword">new</span> <span class="type">BitmapWorkerTask</span>();
-        task.execute(url);
-    }
-    <span class="keyword">return</span> view;
-}
-
-......
-
-<span class="comment">/**
- * 异步下载图片的任务。
- * 
- * @author guolin
- */</span>
-<span class="class"><span class="keyword">class</span> <span class="title">BitmapWorkerTask</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AsyncTask&lt;String</span>, <span class="title">Void</span>, <span class="title">BitmapDrawable&gt;</span> {</span>
-
-    <span class="type">String</span> imageUrl; 
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">protected</span> <span class="type">BitmapDrawable</span> doInBackground(<span class="type">String</span>... params) {
-        imageUrl = params[<span class="number">0</span>];
-        <span class="comment">// 在后台开始下载图片</span>
-        <span class="type">Bitmap</span> bitmap = downloadBitmap(imageUrl);
-        <span class="type">BitmapDrawable</span> drawable = <span class="keyword">new</span> <span class="type">BitmapDrawable</span>(getContext().getResources(), bitmap);
-        addBitmapToMemoryCache(imageUrl, drawable);
-        <span class="keyword">return</span> drawable;
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">protected</span> void onPostExecute(<span class="type">BitmapDrawable</span> drawable) {
-        <span class="type">ImageView</span> imageView = (<span class="type">ImageView</span>) mListView.findViewWithTag(imageUrl);  
-        <span class="keyword">if</span> (imageView != <span class="literal">null</span> &amp;&amp; drawable != <span class="literal">null</span>) {  
-            imageView.setImageDrawable(drawable);  
-        } 
-    }
-
-    ......
-
-}
-</code></pre><p>}</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/29/My-Test-Post/" itemprop="url">
-                  My Test Post
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T00:40:53+08:00" content="2015-11-29">
-              2015-11-29
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>public class ImageAdapter extends ArrayAdapter<string> {</string></p>
-<pre><code><span class="keyword">private</span> <span class="type">ListView</span> mListView; 
-
-......
-
-<span class="annotation">@Override</span>
-public <span class="type">View</span> getView(int position, <span class="type">View</span> convertView, <span class="type">ViewGroup</span> parent) {
-    <span class="keyword">if</span> (mListView == <span class="literal">null</span>) {  
-        mListView = (<span class="type">ListView</span>) parent;  
-    } 
-
-    <span class="type">String</span> url = getItem(position);
-    <span class="type">View</span> view;
-    <span class="keyword">if</span> (convertView == <span class="literal">null</span>) {
-        view = <span class="type">LayoutInflater</span>.from(getContext()).inflate(<span class="type">R</span>.layout.image_item, <span class="literal">null</span>);
-    } <span class="keyword">else</span> {
-        view = convertView;
-    }
-    <span class="type">ImageView</span> image = (<span class="type">ImageView</span>) view.findViewById(<span class="type">R</span>.id.image);
-    image.setImageResource(<span class="type">R</span>.drawable.empty_photo);
-    image.setTag(url);
-    <span class="type">BitmapDrawable</span> drawable = getBitmapFromMemoryCache(url);
-    <span class="keyword">if</span> (drawable != <span class="literal">null</span>) {
-        image.setImageDrawable(drawable);
-    } <span class="keyword">else</span> {
-        <span class="type">BitmapWorkerTask</span> task = <span class="keyword">new</span> <span class="type">BitmapWorkerTask</span>();
-        task.execute(url);
-    }
-    <span class="keyword">return</span> view;
-}
-
-......
-
-<span class="comment">/**
- * 异步下载图片的任务。
- * 
- * @author guolin
- */</span>
-<span class="class"><span class="keyword">class</span> <span class="title">BitmapWorkerTask</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AsyncTask&lt;String</span>, <span class="title">Void</span>, <span class="title">BitmapDrawable&gt;</span> {</span>
-
-    <span class="type">String</span> imageUrl; 
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">protected</span> <span class="type">BitmapDrawable</span> doInBackground(<span class="type">String</span>... params) {
-        imageUrl = params[<span class="number">0</span>];
-        <span class="comment">// 在后台开始下载图片</span>
-        <span class="type">Bitmap</span> bitmap = downloadBitmap(imageUrl);
-        <span class="type">BitmapDrawable</span> drawable = <span class="keyword">new</span> <span class="type">BitmapDrawable</span>(getContext().getResources(), bitmap);
-        addBitmapToMemoryCache(imageUrl, drawable);
-        <span class="keyword">return</span> drawable;
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="keyword">protected</span> void onPostExecute(<span class="type">BitmapDrawable</span> drawable) {
-        <span class="type">ImageView</span> imageView = (<span class="type">ImageView</span>) mListView.findViewWithTag(imageUrl);  
-        <span class="keyword">if</span> (imageView != <span class="literal">null</span> &amp;&amp; drawable != <span class="literal">null</span>) {  
-            imageView.setImageDrawable(drawable);  
-        } 
-    }
-
-    ......
-
-}
-</code></pre><p>}</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
 
     
       
@@ -499,7 +240,7 @@ public <span class="type">View</span> getView(int position, <span class="type">V
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T00:38:10+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T02:58:59+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
@@ -507,6 +248,13 @@ public <span class="type">View</span> getView(int position, <span class="type">V
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/29/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/hello-world/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -591,10 +339,10 @@ public <span class="type">View</span> getView(int position, <span class="type">V
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Willing Xyz" itemprop="image"/>
+          <img class="site-author-image" src="/uploads/avatar.jpg" alt="Willing Xyz" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Willing Xyz</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">Are you kidding me?</p>
+        <p class="site-description motion-element" itemprop="description">此时正当修行时</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -604,10 +352,10 @@ public <span class="type">View</span> getView(int position, <span class="type">V
           </div>
 
           <div class="site-state-item site-state-categories">
-            
+            <a href="/categories">
               <span class="site-state-item-count">0</span>
               <span class="site-state-item-name">分类</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -622,6 +370,16 @@ public <span class="type">View</span> getView(int position, <span class="type">V
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Willing-Xyz" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -647,7 +405,7 @@ public <span class="type">View</span> getView(int position, <span class="type">V
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2013 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
@@ -681,11 +439,28 @@ public <span class="type">View</span> getView(int position, <span class="type">V
 
   
     
-    
 
   
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"willing-xyz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
 
 
+    
   
 
   
