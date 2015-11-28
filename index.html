@@ -65,8 +65,8 @@
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
-    scheme: '',
-    sidebar: 'hide',
+    scheme: 'Mist',
+    sidebar: 'post',
     motion: true
   };
 </script>
@@ -197,15 +197,120 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/29/Handler/" itemprop="url">
+                  Handler
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-29T04:05:39+08:00" content="2015-11-29">
+              2015-11-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/29/Handler/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Handler/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+            基本要素
+Message：消息的表示
+MessageQueue：消息队列
+Looper：消息循环，用于从消息队列中取出消息
+Handler：消息处理
+
+Handler的使用
+初始化为了使用Handle
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/11/29/Handler/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -246,6 +351,21 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -272,22 +392,12 @@
 
       
         
-          <h2 id="View绘制流程">View绘制流程</h2><ol>
-<li><p>measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimension保存计算结果。<br><img src="/images/view-measure.png" alt="measure"></p>
-</li>
-<li><p>layout：用于设置View在屏幕上显示的位置。<br><img src="/images/view-layout.png" alt="layout"></p>
-</li>
-<li><p>draw：将View显示在屏幕上</p>
-<ol>
-<li>绘制背景</li>
-<li>如果要视图显示渐变框，这里会做一些准备工作</li>
-<li>绘制视图本身，即调用onDraw()函数。</li>
-<li>如果是ViewGroup，则绘制子视图，即dispatchDraw()函数。</li>
-<li>如果需要（应用程序调用了setVerticalFadingEdge或者setHorizontalFadingEdge），开始绘制渐变框；</li>
-<li>绘制滚动条；</li>
-</ol>
-</li>
-</ol>
+          <span itemprop="articleBody">
+            
+            View绘制流程
+measure：用于计算View的长度和宽度。其中会调用onMeasure方法，子类通过重写该方法，可以实现自己的计算View大小的方式，最后必须调用setMeasureDimens
+            ...
+          </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/#more" rel="contents">
               阅读全文 &raquo;
@@ -353,14 +463,14 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -427,7 +537,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Mist
   </a>
 </div>
 
