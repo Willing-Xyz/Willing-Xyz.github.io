@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Java,Java并发编程实践,多线程," />
 
 
 
@@ -51,49 +51,37 @@
 
 
 
-<meta name="description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta name="description" content="核心思想要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的和可变的状态的访问。其次，对于只读对象，也要保证它的可见性。
+对象的状态：包含了任何可能影响其外部可见行为的数据。
+共享：变量可以由多个线程同时访问。
+可变：变量的值在其生命周期内可以发生变化。
+竞态条件竞态条件：当某个计算的正确性取决于多个线程的交替执行时序时，就会发生竞态条件。
+常见的竞态条件
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+先检查后执行：通过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Handler">
-<meta property="og:url" content="http://yoursite.com/2015/11/29/Handler/index.html">
+<meta property="og:title" content="Java并发编程实践笔记-线程安全">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/Java并发编程实践笔记-线程安全/index.html">
 <meta property="og:site_name" content="Willing Xyz's Blog">
-<meta property="og:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta property="og:description" content="核心思想要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的和可变的状态的访问。其次，对于只读对象，也要保证它的可见性。
+对象的状态：包含了任何可能影响其外部可见行为的数据。
+共享：变量可以由多个线程同时访问。
+可变：变量的值在其生命周期内可以发生变化。
+竞态条件竞态条件：当某个计算的正确性取决于多个线程的交替执行时序时，就会发生竞态条件。
+常见的竞态条件
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
-<meta property="og:updated_time" content="2015-11-28T21:12:49.136Z">
+先检查后执行：通过">
+<meta property="og:updated_time" content="2015-11-29T13:13:19.190Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Handler">
-<meta name="twitter:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta name="twitter:title" content="Java并发编程实践笔记-线程安全">
+<meta name="twitter:description" content="核心思想要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对共享的和可变的状态的访问。其次，对于只读对象，也要保证它的可见性。
+对象的状态：包含了任何可能影响其外部可见行为的数据。
+共享：变量可以由多个线程同时访问。
+可变：变量的值在其生命周期内可以发生变化。
+竞态条件竞态条件：当某个计算的正确性取决于多个线程的交替执行时序时，就会发生竞态条件。
+常见的竞态条件
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+先检查后执行：通过">
 
 
 
@@ -105,7 +93,7 @@ Handler的使用
   };
 </script>
 
-  <title> Handler | Willing Xyz's Blog </title>
+  <title> Java并发编程实践笔记-线程安全 | Willing Xyz's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +233,7 @@ Handler的使用
             
             
               
-                Handler
+                Java并发编程实践笔记-线程安全
               
             
           </h1>
@@ -254,7 +242,7 @@ Handler的使用
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T04:05:39+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T21:10:58+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
@@ -264,8 +252,8 @@ Handler的使用
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -276,8 +264,8 @@ Handler的使用
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/Android基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础</span>
+                  <a href="/categories/Java/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
                   </a>
                 </span>
 
@@ -292,8 +280,8 @@ Handler的使用
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/29/Handler/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Handler/" itemprop="commentsCount"></span>
+                <a href="/2015/11/29/Java并发编程实践笔记-线程安全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Java并发编程实践笔记-线程安全/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,40 +300,70 @@ Handler的使用
       
 
       
-        <span itemprop="articleBody"><h2 id="基本要素">基本要素</h2><ul>
-<li>Message：消息的表示</li>
-<li>MessageQueue：消息队列</li>
-<li>Looper：消息循环，用于从消息队列中取出消息</li>
-<li>Handler：消息处理</li>
-</ul>
-<h2 id="Handler的使用">Handler的使用</h2><ol>
-<li>初始化<br>为了使用Handler，必须初始化。</li>
-</ol>
+        <span itemprop="articleBody"><h2 id="核心思想">核心思想</h2><p>要编写线程安全的代码，其核心在于要对状态访问操作进行管理，特别是对<strong>共享的和可变的状态</strong>的访问。<br>其次，对于只读对象，也要保证它的可见性。</p>
+<p>对象的状态：包含了任何可能影响其外部可见行为的数据。</p>
+<p>共享：变量可以由多个线程同时访问。</p>
+<p>可变：变量的值在其生命周期内可以发生变化。</p>
+<h2 id="竞态条件">竞态条件</h2><p>竞态条件：当某个计算的正确性取决于多个线程的交替执行时序时，就会发生竞态条件。</p>
+<p><strong>常见的竞态条件</strong></p>
 <ul>
-<li>在主线程中，已经预先初始化了，所以可以直接使用Handler.</li>
-<li>而在自己创建的线程中，需要<strong>首先调用Looper.prepare();方法用来初始化MessageQueue和实例化Looper并设置Looper作为ThreadLocal的值</strong>，然后调用Looper.loop()；方法进行消息的循环和处理。</li>
-<li>或者在构造时使用已经初始化的Looper，这样的话，消息的处理依然是在Looper初始化时所在的线程。</li>
+<li>先检查后执行：通过一个可能失效的观测结果来决定下一步的动作（在观测结果为真和执行下一步动作之间，观测结果可能会失效）。</li>
+<li>读取-修改-写入：基于对象之前的状态来定义对象状态的转换（例如i++可分为三步。但i=1，就没有基于对象之前的状态）。</li>
+<li>不是彼此独立的多个变量：如两个变量应该同时更新，要么都不更新。</li>
 </ul>
+<p><strong>解决方法</strong>： 以原子方式执行该组操作。</p>
+<h2 id="多线程中可能存在的问题">多线程中可能存在的问题</h2><ul>
+<li>原子性：必须以原子方式执行的操作可能被分开执行</li>
+<li>可见性：一个线程写入的值，不能立即被另一个线程读取</li>
+<li>重排序：编译器和处理器为了优化性能，可能把<strong>没有依赖关系的操作</strong>重排序</li>
+</ul>
+<h2 id="解决多线程问题的方法">解决多线程问题的方法</h2><ul>
+<li>锁机制：锁解决了原子性问题，可见性问题，和重排序问题。</li>
+<li>volatile关键字：volatile解决了可见性问题，重排序问题，另外保证了long和double变量可以原子性的执行<strong>单步读或写</strong>操作。</li>
+</ul>
+<h2 id="final关键字">final关键字</h2><p>对于包含final字段的对象，只要对象是正确构造的（被构造对象的引用在构造函数中没有“逸出”），那么不需要使用同步（指lock和volatile的使用），就可以保证任意线程都能看到这个final字段在构造函数中被初始化之后的值（包括final字段内部的状态）。<br>如果final字段引用的是可变对象，那么在访问可变对象的内部状态时仍然需要同步。</p>
+<h2 id="发布与逸出">发布与逸出</h2><ul>
+<li>发布：使对象能够在当前作用域之外的代码中使用，并且通过该对象能够访问的所有对象也会被发布。</li>
+<li>逸出：某个不应该发布的对象被发布时，这种情况被称为逸出。</li>
+<li>未被正确发布：发布时没有使用同步来确保对象对其他线程可见。</li>
+</ul>
+<h3 id="逸出-不正确构造："><strong>逸出-不正确构造</strong>：</h3><p>如果this引用在构造过程中逸出，那么这种对象就被认为是不正确构造。</p>
+<ul>
+<li>在构造函数中把内部类实例发布（因为内部类实例中包含了对外部类实例的引用），如注册监听器，这使得在构造函数还未完成时，使尚未完全构造的对象发布出去。</li>
+<li>在构造函数中启动一个线程（如果该线程是内部类，或者传递this到线程的构造函数）。</li>
+<li>在构造函数中调用给一个可override的实例方法（既不是private方法也不是final方法），因为如果子类override该方法，而把未构造完的this置于一个未知的环境（因为子类可以任意override）。</li>
+</ul>
+<p>如果想要在构造函数中注册一个事件监听器或启动线程，那么可以使用一个私有的构造函数和一个公共的工厂方法。</p>
 <ol>
-<li><p>扩展Handler或者实现Handler.Callback接口作为Handler的构造参数，并实现handleMessage方法。实例化Handler子类时，应该在prepare和loop之间进行。</p>
-</li>
-<li><p>获得Handler对象实例，调用方法发送消息到消息队列。消息可以是Runnable或Message类型，分别是使用post和send方法。</p>
-</li>
+<li>创建一个私有变量，来保存监听器或线程。</li>
+<li>创建一个私有构造函数，在其中创建监听器或线程实例。</li>
+<li>创建一个公有newInstance/init方法，在该方法中启动线程或注册监听器。</li>
 </ol>
-<h2 id="HandlerThread的使用">HandlerThread的使用</h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HandlerThread <span class="keyword">thread</span> = <span class="literal">new</span> HandlerThread(<span class="string">"thread name"</span> );</span><br><span class="line"><span class="keyword">thread</span><span class="built_in">.</span>start (); <span class="comment">// 要把线程启动</span></span><br><span class="line"> </span><br><span class="line">Handler handler = <span class="literal">new</span> Handler(<span class="keyword">thread</span><span class="built_in">.</span>getLooper ()) &#123;</span><br><span class="line"><span class="comment">// 实现handleMessage方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为HandlerThread的run方法中，已经调用Looper的prepare和loop方法，这个线程已经在等待消息了。<br>Handler的构造函数中，使用了上面线程的Looper，因此，发送给Handler的消息会放到上面线程的Queue中，且在上面线程中执行。</p>
-<h2 id="post和sendMessage">post和sendMessage</h2><p>post发送的Runnable最终被封装为Message，其中Runnable作为Message的callback域的值。<br>然后当Looper的消息循环收到消息时，根据Message的target域中的值，会调用对应Handler的dispatchMessage方法。<br>从方法中可以看到，如果Message的callback不为空（也就是使用post发送），那么直接调用Runnable的run方法，也就是说，在Looper所在的线程中同步处理。<br>否则，则在handleMessage方法中处理。默认的handleMessage方法为空。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable r)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span>  sendMessageDelayed(getPostMessage(r), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function">Message <span class="title">getPostMessage</span><span class="params">(Runnable r)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">    Message m = Message.obtain();</span><br><span class="line">    m.callback = r;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">dispatchMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (msg.callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">        handleCallback(msg);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (mCallback != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        handleMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">handleCallback</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">    message.callback.run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Handler可能引起的内存泄漏和解决方案">Handler可能引起的内存泄漏和解决方案</h2><p>首先，Looper的prepare方法会设置Looper到ThreadLocal中，而ThreadLocal变量作为Looper的static变量，又因为Message的target字段中包含Handler的引用，而Message被放入消息队列，所以导致Handler的生命周期比Activity长。</p>
-<p>如果Handler在Activity作为内部类实现，那么就会保存一个Activity的引用。或者消息队列中包含尚未处理的Message，当Activity销毁后，导致Activity不能被垃圾回收。<br><strong>解决办法：</strong></p>
-<ol>
-<li>Handler作为静态类或外部类实现</li>
-<li>Activity作为参数传递给Handler的构造器</li>
-<li>Handler内部使用软引用或弱引用来保存Activity。</li>
-<li>在handleMessage或run方法中使用Activity时，应该判断它是否为空。</li>
-<li>另外，在Handler的post参数Runnable，也不应该使用内部类。</li>
-</ol>
-<p>另外，当Activity销毁时，还在消息队列中排队的任务应该被取消掉，否则Activity还是不能被垃圾回收。可以通过调用Handler中的remove..方法或者mHandler.removeCallbacksAndMessages(null); 删除所有的Runnable和Message。</p>
-<h2 id="参考">参考</h2><p><a href="http://www.cnblogs.com/angeldevil/p/3340644.html" target="_blank" rel="external">Android消息处理机制(Handler、Looper、MessageQueue与Message)</a><br><a href="http://blog.csdn.net/zhuanglonghai/article/details/38233069" target="_blank" rel="external">Android App 内存泄露之Handler</a></p>
+<h3 id="安全的发布">安全的发布</h3><p>安全的发布：保证对其他线程的可见性（否则，当某线程初始化了某对象后，另外的线程可能看到不一致的状态）</p>
+<ul>
+<li>在静态初始化器中初始化一个对象引用（即static变量在声明时或static块中初始化）</li>
+<li>将对象的引用保存到volatile类型的域或者AtomicReferance对象（那么AtomicReferance变量本身也需要被安全发布）中。</li>
+<li>将对象的引用保存到某个正确构造对象的final类型域中。</li>
+<li>将对象的引用保存到一个由锁保护的域中。</li>
+</ul>
+<p>不可变对象：</p>
+<ul>
+<li>对象创建以后其状态就不能修改</li>
+<li>对象的所有域都是final类型（也可以不是）</li>
+<li>对象是正确创建的（在对象创建期间，this引用没有逸出）</li>
+</ul>
+<p>事实不可变对象：对象技术上是可改变的，但发布之后不会再改变。</p>
+<ul>
+<li>不可变对象必须通过安全方式发布，之后的访问不需要同步。</li>
+<li>final对象可以以任一形式发布，如果引用的对象可变，仍然需要同步。</li>
+<li>事实不可变对象：必须通过安全方式发布，之后的访问不需要同步。</li>
+<li>可变对象：只能确保发布时的可见性，之后对它的访问依然需要同步（或者根据条件使用volatile）。</li>
+</ul>
+<h2 id="在现有的安全类中添加功能">在现有的安全类中添加功能</h2><ul>
+<li>扩展X类（使用X类的锁，在访问/修改X类的状态时）</li>
+<li>客户端加锁（包含X类的一个实例，并且使用X类内部使用的锁来同步）<br> 以上两种方法把同步策略实现分布在多个源代码文件中，如果底层的类改变了同步策略并选择了使用不同的锁来保护它的状态变量，那么子类的安全性会被破坏。 </li>
+<li>组合（实现一个类，把原有的操作委托给X类，并使用自己的锁来同步）<br>推荐使用该方法。<br>这种方法不用关心底层类的加锁机制，它在外部又加上一个锁。</li>
+</ul>
 </span>
       
     </div>
@@ -354,7 +372,11 @@ Handler的使用
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/Java并发编程实践/" rel="tag">#Java并发编程实践</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -363,16 +385,16 @@ Handler的使用
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/" rel="next" title="View/ViewGroup的绘制流程与它们的自定义">
-                <i class="fa fa-chevron-left"></i> View/ViewGroup的绘制流程与它们的自定义
+              <a href="/2015/11/29/Java并发编程实践笔记-概念/" rel="next" title="Java并发编程实践笔记-概念">
+                <i class="fa fa-chevron-left"></i> Java并发编程实践笔记-概念
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/29/ThreadLocal/" rel="prev" title="ThreadLocal">
-                ThreadLocal <i class="fa fa-chevron-right"></i>
+              <a href="/2015/11/30/Collection-Map/" rel="prev" title="Collection Map">
+                Collection Map <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -400,8 +422,8 @@ Handler的使用
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/29/Handler/"
-           data-title="Handler" data-url="http://yoursite.com/2015/11/29/Handler/">
+      <div class="ds-thread" data-thread-key="2015/11/29/Java并发编程实践笔记-线程安全/"
+           data-title="Java并发编程实践笔记-线程安全" data-url="http://yoursite.com/2015/11/29/Java并发编程实践笔记-线程安全/">
       </div>
     
   </div>
@@ -501,7 +523,7 @@ Handler的使用
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本要素"><span class="nav-number">1.</span> <span class="nav-text">基本要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler的使用"><span class="nav-number">2.</span> <span class="nav-text">Handler的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread的使用"><span class="nav-number">3.</span> <span class="nav-text">HandlerThread的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post和sendMessage"><span class="nav-number">4.</span> <span class="nav-text">post和sendMessage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler可能引起的内存泄漏和解决方案"><span class="nav-number">5.</span> <span class="nav-text">Handler可能引起的内存泄漏和解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#核心思想"><span class="nav-number">1.</span> <span class="nav-text">核心思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#竞态条件"><span class="nav-number">2.</span> <span class="nav-text">竞态条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程中可能存在的问题"><span class="nav-number">3.</span> <span class="nav-text">多线程中可能存在的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决多线程问题的方法"><span class="nav-number">4.</span> <span class="nav-text">解决多线程问题的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final关键字"><span class="nav-number">5.</span> <span class="nav-text">final关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布与逸出"><span class="nav-number">6.</span> <span class="nav-text">发布与逸出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逸出-不正确构造："><span class="nav-number">6.1.</span> <span class="nav-text">逸出-不正确构造：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全的发布"><span class="nav-number">6.2.</span> <span class="nav-text">安全的发布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在现有的安全类中添加功能"><span class="nav-number">7.</span> <span class="nav-text">在现有的安全类中添加功能</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

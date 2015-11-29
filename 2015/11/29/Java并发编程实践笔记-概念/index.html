@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Java,Java并发编程实践,多线程," />
 
 
 
@@ -51,49 +51,46 @@
 
 
 
-<meta name="description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta name="description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
 
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+多线程带来的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Handler">
-<meta property="og:url" content="http://yoursite.com/2015/11/29/Handler/index.html">
+<meta property="og:title" content="Java并发编程实践笔记-概念">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/Java并发编程实践笔记-概念/index.html">
 <meta property="og:site_name" content="Willing Xyz's Blog">
-<meta property="og:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta property="og:description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
 
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
-<meta property="og:updated_time" content="2015-11-28T21:12:49.136Z">
+多线程带来的">
+<meta property="og:updated_time" content="2015-11-29T13:12:15.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Handler">
-<meta name="twitter:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
+<meta name="twitter:title" content="Java并发编程实践笔记-概念">
+<meta name="twitter:description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
 
-Handler的使用
-初始化为了使用Handler，必须初始化。
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
 
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+多线程带来的">
 
 
 
@@ -105,7 +102,7 @@ Handler的使用
   };
 </script>
 
-  <title> Handler | Willing Xyz's Blog </title>
+  <title> Java并发编程实践笔记-概念 | Willing Xyz's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +242,7 @@ Handler的使用
             
             
               
-                Handler
+                Java并发编程实践笔记-概念
               
             
           </h1>
@@ -254,7 +251,7 @@ Handler的使用
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T04:05:39+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T21:10:36+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
@@ -264,8 +261,8 @@ Handler的使用
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -276,8 +273,8 @@ Handler的使用
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/Android基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础</span>
+                  <a href="/categories/Java/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
                   </a>
                 </span>
 
@@ -292,8 +289,8 @@ Handler的使用
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/29/Handler/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Handler/" itemprop="commentsCount"></span>
+                <a href="/2015/11/29/Java并发编程实践笔记-概念/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Java并发编程实践笔记-概念/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,40 +309,23 @@ Handler的使用
       
 
       
-        <span itemprop="articleBody"><h2 id="基本要素">基本要素</h2><ul>
-<li>Message：消息的表示</li>
-<li>MessageQueue：消息队列</li>
-<li>Looper：消息循环，用于从消息队列中取出消息</li>
-<li>Handler：消息处理</li>
+        <span itemprop="articleBody"><h2 id="并发与并行">并发与并行</h2><ul>
+<li>并发（concurrent）：多个线程在同一个CPU上交替执行。</li>
+<li>并行（parallel）：多个线程在各自的CPU上执行。</li>
 </ul>
-<h2 id="Handler的使用">Handler的使用</h2><ol>
-<li>初始化<br>为了使用Handler，必须初始化。</li>
-</ol>
-<ul>
-<li>在主线程中，已经预先初始化了，所以可以直接使用Handler.</li>
-<li>而在自己创建的线程中，需要<strong>首先调用Looper.prepare();方法用来初始化MessageQueue和实例化Looper并设置Looper作为ThreadLocal的值</strong>，然后调用Looper.loop()；方法进行消息的循环和处理。</li>
-<li>或者在构造时使用已经初始化的Looper，这样的话，消息的处理依然是在Looper初始化时所在的线程。</li>
+<h2 id="多线程的优势">多线程的优势</h2><ul>
+<li>发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。</li>
+<li>建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。</li>
+<li>异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。</li>
+<li>响应更灵敏的用户界面</li>
 </ul>
-<ol>
-<li><p>扩展Handler或者实现Handler.Callback接口作为Handler的构造参数，并实现handleMessage方法。实例化Handler子类时，应该在prepare和loop之间进行。</p>
-</li>
-<li><p>获得Handler对象实例，调用方法发送消息到消息队列。消息可以是Runnable或Message类型，分别是使用post和send方法。</p>
-</li>
-</ol>
-<h2 id="HandlerThread的使用">HandlerThread的使用</h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HandlerThread <span class="keyword">thread</span> = <span class="literal">new</span> HandlerThread(<span class="string">"thread name"</span> );</span><br><span class="line"><span class="keyword">thread</span><span class="built_in">.</span>start (); <span class="comment">// 要把线程启动</span></span><br><span class="line"> </span><br><span class="line">Handler handler = <span class="literal">new</span> Handler(<span class="keyword">thread</span><span class="built_in">.</span>getLooper ()) &#123;</span><br><span class="line"><span class="comment">// 实现handleMessage方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为HandlerThread的run方法中，已经调用Looper的prepare和loop方法，这个线程已经在等待消息了。<br>Handler的构造函数中，使用了上面线程的Looper，因此，发送给Handler的消息会放到上面线程的Queue中，且在上面线程中执行。</p>
-<h2 id="post和sendMessage">post和sendMessage</h2><p>post发送的Runnable最终被封装为Message，其中Runnable作为Message的callback域的值。<br>然后当Looper的消息循环收到消息时，根据Message的target域中的值，会调用对应Handler的dispatchMessage方法。<br>从方法中可以看到，如果Message的callback不为空（也就是使用post发送），那么直接调用Runnable的run方法，也就是说，在Looper所在的线程中同步处理。<br>否则，则在handleMessage方法中处理。默认的handleMessage方法为空。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable r)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span>  sendMessageDelayed(getPostMessage(r), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function">Message <span class="title">getPostMessage</span><span class="params">(Runnable r)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">    Message m = Message.obtain();</span><br><span class="line">    m.callback = r;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">dispatchMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (msg.callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">        handleCallback(msg);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (mCallback != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        handleMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">handleCallback</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">    message.callback.run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Handler可能引起的内存泄漏和解决方案">Handler可能引起的内存泄漏和解决方案</h2><p>首先，Looper的prepare方法会设置Looper到ThreadLocal中，而ThreadLocal变量作为Looper的static变量，又因为Message的target字段中包含Handler的引用，而Message被放入消息队列，所以导致Handler的生命周期比Activity长。</p>
-<p>如果Handler在Activity作为内部类实现，那么就会保存一个Activity的引用。或者消息队列中包含尚未处理的Message，当Activity销毁后，导致Activity不能被垃圾回收。<br><strong>解决办法：</strong></p>
-<ol>
-<li>Handler作为静态类或外部类实现</li>
-<li>Activity作为参数传递给Handler的构造器</li>
-<li>Handler内部使用软引用或弱引用来保存Activity。</li>
-<li>在handleMessage或run方法中使用Activity时，应该判断它是否为空。</li>
-<li>另外，在Handler的post参数Runnable，也不应该使用内部类。</li>
-</ol>
-<p>另外，当Activity销毁时，还在消息队列中排队的任务应该被取消掉，否则Activity还是不能被垃圾回收。可以通过调用Handler中的remove..方法或者mHandler.removeCallbacksAndMessages(null); 删除所有的Runnable和Message。</p>
-<h2 id="参考">参考</h2><p><a href="http://www.cnblogs.com/angeldevil/p/3340644.html" target="_blank" rel="external">Android消息处理机制(Handler、Looper、MessageQueue与Message)</a><br><a href="http://blog.csdn.net/zhuanglonghai/article/details/38233069" target="_blank" rel="external">Android App 内存泄露之Handler</a></p>
+<h2 id="多线程带来的风险">多线程带来的风险</h2><ul>
+<li>安全性：产生正确的结果</li>
+<li>活跃性：正确的结果最终会发生（如死锁）</li>
+<li>性能：正确的结果尽快发生</li>
+</ul>
+<h2 id="最低安全性">最低安全性</h2><p>当线程在没有同步的情况下读取变量时，可能是一个失效值，但至少这个值是由之前某个线程设置的值，而不是一个随机值。</p>
+<p>最低安全性适用于大多数变量，但存在一个例外：非volatile类型的64位数值变量（double和long）。使用volatile可以保证它们的最低安全性。</p>
 </span>
       
     </div>
@@ -354,7 +334,11 @@ Handler的使用
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/Java并发编程实践/" rel="tag">#Java并发编程实践</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -363,16 +347,16 @@ Handler的使用
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/" rel="next" title="View/ViewGroup的绘制流程与它们的自定义">
-                <i class="fa fa-chevron-left"></i> View/ViewGroup的绘制流程与它们的自定义
+              <a href="/2015/11/29/ListView/" rel="next" title="ListView">
+                <i class="fa fa-chevron-left"></i> ListView
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/29/ThreadLocal/" rel="prev" title="ThreadLocal">
-                ThreadLocal <i class="fa fa-chevron-right"></i>
+              <a href="/2015/11/29/Java并发编程实践笔记-线程安全/" rel="prev" title="Java并发编程实践笔记-线程安全">
+                Java并发编程实践笔记-线程安全 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -400,8 +384,8 @@ Handler的使用
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/29/Handler/"
-           data-title="Handler" data-url="http://yoursite.com/2015/11/29/Handler/">
+      <div class="ds-thread" data-thread-key="2015/11/29/Java并发编程实践笔记-概念/"
+           data-title="Java并发编程实践笔记-概念" data-url="http://yoursite.com/2015/11/29/Java并发编程实践笔记-概念/">
       </div>
     
   </div>
@@ -501,7 +485,7 @@ Handler的使用
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本要素"><span class="nav-number">1.</span> <span class="nav-text">基本要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler的使用"><span class="nav-number">2.</span> <span class="nav-text">Handler的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread的使用"><span class="nav-number">3.</span> <span class="nav-text">HandlerThread的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post和sendMessage"><span class="nav-number">4.</span> <span class="nav-text">post和sendMessage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler可能引起的内存泄漏和解决方案"><span class="nav-number">5.</span> <span class="nav-text">Handler可能引起的内存泄漏和解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发与并行"><span class="nav-number">1.</span> <span class="nav-text">并发与并行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的优势"><span class="nav-number">2.</span> <span class="nav-text">多线程的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程带来的风险"><span class="nav-number">3.</span> <span class="nav-text">多线程带来的风险</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最低安全性"><span class="nav-number">4.</span> <span class="nav-text">最低安全性</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
