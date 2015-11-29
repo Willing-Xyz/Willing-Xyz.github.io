@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Java,多线程," />
 
 
 
@@ -51,49 +51,16 @@
 
 
 
-<meta name="description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
-
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+<meta name="description" content="ThreadLocal的作用ThreadLocal是为了隔离多个线程的数据共享。每个线程拥有自己的对象，不会和其他线程发生数据竞争。另外，它们之间也不应该发生数据竞争，因为既然使用了ThreadLocal，说明每个线程都有自己的数据，并且和其他的线程不同。所以，ThreadLocal并不是为了解决数据竞争的问题，解决数据竞争是指用同步、锁等来协调多个线程对同一个数据的访问，而使用ThreadLoc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Handler">
-<meta property="og:url" content="http://yoursite.com/2015/11/29/Handler/index.html">
+<meta property="og:title" content="ThreadLocal">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/ThreadLocal/index.html">
 <meta property="og:site_name" content="Willing Xyz's Blog">
-<meta property="og:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
-
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
-<meta property="og:updated_time" content="2015-11-28T21:12:49.136Z">
+<meta property="og:description" content="ThreadLocal的作用ThreadLocal是为了隔离多个线程的数据共享。每个线程拥有自己的对象，不会和其他线程发生数据竞争。另外，它们之间也不应该发生数据竞争，因为既然使用了ThreadLocal，说明每个线程都有自己的数据，并且和其他的线程不同。所以，ThreadLocal并不是为了解决数据竞争的问题，解决数据竞争是指用同步、锁等来协调多个线程对同一个数据的访问，而使用ThreadLoc">
+<meta property="og:updated_time" content="2015-11-28T21:21:14.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Handler">
-<meta name="twitter:description" content="基本要素
-Message：消息的表示
-MessageQueue：消息队列
-Looper：消息循环，用于从消息队列中取出消息
-Handler：消息处理
-
-Handler的使用
-初始化为了使用Handler，必须初始化。
-
-
-在主线程中，已经预先初始化了，所以可以直接使用Handler.
-而在自己创建的线程中，需要首先调用Looper.prepare();方法用来初始化MessageQueue和实例化">
+<meta name="twitter:title" content="ThreadLocal">
+<meta name="twitter:description" content="ThreadLocal的作用ThreadLocal是为了隔离多个线程的数据共享。每个线程拥有自己的对象，不会和其他线程发生数据竞争。另外，它们之间也不应该发生数据竞争，因为既然使用了ThreadLocal，说明每个线程都有自己的数据，并且和其他的线程不同。所以，ThreadLocal并不是为了解决数据竞争的问题，解决数据竞争是指用同步、锁等来协调多个线程对同一个数据的访问，而使用ThreadLoc">
 
 
 
@@ -105,7 +72,7 @@ Handler的使用
   };
 </script>
 
-  <title> Handler | Willing Xyz's Blog </title>
+  <title> ThreadLocal | Willing Xyz's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +212,7 @@ Handler的使用
             
             
               
-                Handler
+                ThreadLocal
               
             
           </h1>
@@ -254,7 +221,7 @@ Handler的使用
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T04:05:39+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T05:15:45+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
@@ -264,8 +231,8 @@ Handler的使用
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -276,8 +243,8 @@ Handler的使用
 
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android/Android基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Android基础</span>
+                  <a href="/categories/Java/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
                   </a>
                 </span>
 
@@ -292,8 +259,8 @@ Handler的使用
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/29/Handler/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Handler/" itemprop="commentsCount"></span>
+                <a href="/2015/11/29/ThreadLocal/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/ThreadLocal/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,40 +279,14 @@ Handler的使用
       
 
       
-        <span itemprop="articleBody"><h2 id="基本要素">基本要素</h2><ul>
-<li>Message：消息的表示</li>
-<li>MessageQueue：消息队列</li>
-<li>Looper：消息循环，用于从消息队列中取出消息</li>
-<li>Handler：消息处理</li>
-</ul>
-<h2 id="Handler的使用">Handler的使用</h2><ol>
-<li>初始化<br>为了使用Handler，必须初始化。</li>
-</ol>
-<ul>
-<li>在主线程中，已经预先初始化了，所以可以直接使用Handler.</li>
-<li>而在自己创建的线程中，需要<strong>首先调用Looper.prepare();方法用来初始化MessageQueue和实例化Looper并设置Looper作为ThreadLocal的值</strong>，然后调用Looper.loop()；方法进行消息的循环和处理。</li>
-<li>或者在构造时使用已经初始化的Looper，这样的话，消息的处理依然是在Looper初始化时所在的线程。</li>
-</ul>
-<ol>
-<li><p>扩展Handler或者实现Handler.Callback接口作为Handler的构造参数，并实现handleMessage方法。实例化Handler子类时，应该在prepare和loop之间进行。</p>
-</li>
-<li><p>获得Handler对象实例，调用方法发送消息到消息队列。消息可以是Runnable或Message类型，分别是使用post和send方法。</p>
-</li>
-</ol>
-<h2 id="HandlerThread的使用">HandlerThread的使用</h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HandlerThread <span class="keyword">thread</span> = <span class="literal">new</span> HandlerThread(<span class="string">"thread name"</span> );</span><br><span class="line"><span class="keyword">thread</span><span class="built_in">.</span>start (); <span class="comment">// 要把线程启动</span></span><br><span class="line"> </span><br><span class="line">Handler handler = <span class="literal">new</span> Handler(<span class="keyword">thread</span><span class="built_in">.</span>getLooper ()) &#123;</span><br><span class="line"><span class="comment">// 实现handleMessage方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为HandlerThread的run方法中，已经调用Looper的prepare和loop方法，这个线程已经在等待消息了。<br>Handler的构造函数中，使用了上面线程的Looper，因此，发送给Handler的消息会放到上面线程的Queue中，且在上面线程中执行。</p>
-<h2 id="post和sendMessage">post和sendMessage</h2><p>post发送的Runnable最终被封装为Message，其中Runnable作为Message的callback域的值。<br>然后当Looper的消息循环收到消息时，根据Message的target域中的值，会调用对应Handler的dispatchMessage方法。<br>从方法中可以看到，如果Message的callback不为空（也就是使用post发送），那么直接调用Runnable的run方法，也就是说，在Looper所在的线程中同步处理。<br>否则，则在handleMessage方法中处理。默认的handleMessage方法为空。<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="function"><span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable r)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span>  sendMessageDelayed(getPostMessage(r), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function">Message <span class="title">getPostMessage</span><span class="params">(Runnable r)</span> </span><br><span class="line"></span>&#123;</span><br><span class="line">    Message m = Message.obtain();</span><br><span class="line">    m.callback = r;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">dispatchMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (msg.callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">        handleCallback(msg);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (mCallback != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        handleMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">handleCallback</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">    message.callback.run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Handler可能引起的内存泄漏和解决方案">Handler可能引起的内存泄漏和解决方案</h2><p>首先，Looper的prepare方法会设置Looper到ThreadLocal中，而ThreadLocal变量作为Looper的static变量，又因为Message的target字段中包含Handler的引用，而Message被放入消息队列，所以导致Handler的生命周期比Activity长。</p>
-<p>如果Handler在Activity作为内部类实现，那么就会保存一个Activity的引用。或者消息队列中包含尚未处理的Message，当Activity销毁后，导致Activity不能被垃圾回收。<br><strong>解决办法：</strong></p>
-<ol>
-<li>Handler作为静态类或外部类实现</li>
-<li>Activity作为参数传递给Handler的构造器</li>
-<li>Handler内部使用软引用或弱引用来保存Activity。</li>
-<li>在handleMessage或run方法中使用Activity时，应该判断它是否为空。</li>
-<li>另外，在Handler的post参数Runnable，也不应该使用内部类。</li>
-</ol>
-<p>另外，当Activity销毁时，还在消息队列中排队的任务应该被取消掉，否则Activity还是不能被垃圾回收。可以通过调用Handler中的remove..方法或者mHandler.removeCallbacksAndMessages(null); 删除所有的Runnable和Message。</p>
-<h2 id="参考">参考</h2><p><a href="http://www.cnblogs.com/angeldevil/p/3340644.html" target="_blank" rel="external">Android消息处理机制(Handler、Looper、MessageQueue与Message)</a><br><a href="http://blog.csdn.net/zhuanglonghai/article/details/38233069" target="_blank" rel="external">Android App 内存泄露之Handler</a></p>
+        <span itemprop="articleBody"><h2 id="ThreadLocal的作用">ThreadLocal的作用</h2><p>ThreadLocal是为了隔离多个线程的数据共享。每个线程拥有自己的对象，不会和其他线程发生数据竞争。<br>另外，它们之间也不应该发生数据竞争，因为既然使用了ThreadLocal，说明每个线程都有自己的数据，并且和其他的线程不同。<br>所以，ThreadLocal并不是为了解决数据竞争的问题，解决数据竞争是指用同步、锁等来协调多个线程对同一个数据的访问，而使用ThreadLocal时，每个线程存储的是不同的数据。<br>它只是能够在不同的线程下，通过同一个ThreadLocal访问到各自的数据。</p>
+<h2 id="ThreadLocal的方法">ThreadLocal的方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadLocal</span><span class="params">()</span></span><br><span class="line"><span class="keyword">protected</span> T <span class="title">initialValue</span><span class="params">()</span></span><br><span class="line"><span class="comment">// 初始化值。一般可以扩展 ThreadLocal类，并重载该方法。默认为 null。</span></span><br><span class="line"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value )</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span> <span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="ThreadLocal的实现原理">ThreadLocal的实现原理</h2><p>首先，每个线程中有一个ThreadLocalMap类型的成员变量threadLocals。<br>threadLocals的key为ThreadLocal，值为该线程对应的值。<br>所以，每个线程的值保存在线程内部，而不是ThreadLocal中。</p>
+<p>为什么会这么设计？为什么Map不保存在ThreadLocal中，而是保存在Thread中？<br>可能是因为如果保存在ThreadLocal中，当线程结束后，其对应的值不能被垃圾回收，而保存的Thread中，可以保证在Thread结束时，对应的值被垃圾回收。</p>
+<h2 id="ThreadLocal的作用场景">ThreadLocal的作用场景</h2><p>ThreadLocal经常作为private static变量。<br>当它所在的类需要被多个线程使用，而每个线程使用各自的数据时，应该使用ThreadLocal。</p>
+<h2 id="ThreadLocal可能引发的内存泄漏">ThreadLocal可能引发的内存泄漏</h2><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> &#123;</span></span><br><span class="line">    </span><br><span class="line">        static <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">WeakReference</span> <span class="title">&lt;ThreadLocal&lt;?&gt;&gt;</span> </span><br><span class="line"></span>        &#123;</span><br><span class="line">            <span class="comment">/** The value associated with this ThreadLocal. */</span></span><br><span class="line">            <span class="type">Object</span> value ;</span><br><span class="line">            </span><br><span class="line">            <span class="type">Entry</span> (<span class="type">ThreadLocal</span>&lt;?&gt; k, <span class="type">Object</span> v ) &#123;</span><br><span class="line">                <span class="keyword">super</span>(k );</span><br><span class="line">                value = v;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>首先，可以看到，Entry扩展WeakReference，其中Key为WeakReference，而Value为强引用。<br>![][/images/threadlocal-leak.png]<br>所以，当ThreadLocal没有外部强引用时，当系统gc时，ThreadLocal会被回收，key为null，那么对应的value就不能被访问，也不会被释放（除非Thread被销毁）。<br>但是，ThreadLocalMap的实现中，有一些避免内存泄漏的方法。<br>在调用ThreadLocal的get或set方法时，会根据hashcode寻找key的位置，在寻找的过程中，如果发现key为null，而value不为null，会释放value的强引用。<br>当然，在不能保证不存在内存泄漏，所以<strong>在不用时，调用ThreadLocal的remove方法来防止内存泄漏</strong>。</p>
+<h2 id="参考">参考</h2><p><a href="http://qifuguang.me/2015/09/02/[Java并发包学习七]解密ThreadLocal/" target="_blank" rel="external">[Java并发包学习七]解密ThreadLocal </a><br><a href="http://www.cnblogs.com/dolphin0520/p/3920407.html" target="_blank" rel="external">Java并发编程：深入剖析ThreadLocal</a></p>
 </span>
       
     </div>
@@ -354,7 +295,9 @@ Handler的使用
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -363,16 +306,16 @@ Handler的使用
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/29/View-ViewGroup的绘制流程与它们的自定义/" rel="next" title="View/ViewGroup的绘制流程与它们的自定义">
-                <i class="fa fa-chevron-left"></i> View/ViewGroup的绘制流程与它们的自定义
+              <a href="/2015/11/29/Handler/" rel="next" title="Handler">
+                <i class="fa fa-chevron-left"></i> Handler
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/29/ThreadLocal/" rel="prev" title="ThreadLocal">
-                ThreadLocal <i class="fa fa-chevron-right"></i>
+              <a href="/2015/11/29/ListView/" rel="prev" title="ListView">
+                ListView <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -400,8 +343,8 @@ Handler的使用
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/29/Handler/"
-           data-title="Handler" data-url="http://yoursite.com/2015/11/29/Handler/">
+      <div class="ds-thread" data-thread-key="2015/11/29/ThreadLocal/"
+           data-title="ThreadLocal" data-url="http://yoursite.com/2015/11/29/ThreadLocal/">
       </div>
     
   </div>
@@ -501,7 +444,7 @@ Handler的使用
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本要素"><span class="nav-number">1.</span> <span class="nav-text">基本要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler的使用"><span class="nav-number">2.</span> <span class="nav-text">Handler的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HandlerThread的使用"><span class="nav-number">3.</span> <span class="nav-text">HandlerThread的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#post和sendMessage"><span class="nav-number">4.</span> <span class="nav-text">post和sendMessage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler可能引起的内存泄漏和解决方案"><span class="nav-number">5.</span> <span class="nav-text">Handler可能引起的内存泄漏和解决方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal的作用"><span class="nav-number">1.</span> <span class="nav-text">ThreadLocal的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal的方法"><span class="nav-number">2.</span> <span class="nav-text">ThreadLocal的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal的实现原理"><span class="nav-number">3.</span> <span class="nav-text">ThreadLocal的实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal的作用场景"><span class="nav-number">4.</span> <span class="nav-text">ThreadLocal的作用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadLocal可能引发的内存泄漏"><span class="nav-number">5.</span> <span class="nav-text">ThreadLocal可能引发的内存泄漏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
