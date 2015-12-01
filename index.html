@@ -65,7 +65,7 @@
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
-    scheme: '',
+    scheme: 'Mist',
     sidebar: 'post',
     motion: true
   };
@@ -136,6 +136,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -152,6 +162,16 @@
               <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -256,6 +276,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/监听数据库-ContentProvider-Cursor的改变/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -274,36 +301,15 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="ContentObserver">ContentObserver</h2><p>内容观察者，监听数据的改变。<br>当数据改变时，它的onChange方法会被调用。<br>此处的数据一般是ContentProvider，也可以是SQLiteDatabase。</p>
-<p><code>public ContentObserver (Handler handler)</code><br>参数handler如果不为null，则调用handler的post方法发送Runnable对象，其中run方法中调用onChange方法。<br>否则，直接调用onChange方法</p>
-<p><code>public boolean deliverSelfNotifications ()</code><br>如果返回true，表示接收自己引发的改变。</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> onChange (<span class="keyword">boolean</span> selfChange, Uri uri)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> onChange (<span class="keyword">boolean</span> selfChange)</span><br><span class="line">当数据改变时，调用这两个方法。</span><br><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange)</span> </span>&#123;</span><br><span class="line">     onChange(selfChange, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Implement the onChange(boolean, Uri) method to take advantage of the new Uri argument.</span></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange, Uri uri)</span> </span>&#123;</span><br><span class="line">     <span class="comment">// Handle change.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="监听数据的改变">监听数据的改变</h2><p>可以在两个地方注册ContentObserver</p>
-<ul>
-<li>ContentResolver</li>
-<li>Cursor</li>
-</ul>
-<p>ContentResolver类中有以下方法，用来注册ContentObserver。</p>
-<p>通过调用ContentResolver的notifyChange方法通知ContentObserver数据改变了。</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> registerContentObserver (Uri uri, <span class="keyword">boolean</span> notifyForDescendents, ContentObserver observer)</span><br><span class="line">notifyForDescendents参数如果为<span class="keyword">true</span>，表示uri的孩子也会得到通知（根据Uri的层次结构）。</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> unregisterContentObserver (ContentObserver observer)</span><br></pre></td></tr></table></figure>
-<p>通常，我们需要扩展ContentProvider类以向外部提供数据。<br>当我们修改了数据时，如在insert方法中，如果返回值大于0，说明修改了数据，这时调用ContentResolver的notifyChange方法通知改变。</p>
-<p>此外，对于Cursor类，包含以下方法.<br>其中registerContentObserver方法用来注册。<br>和ContentResolver的相比，缺少了Uri参数。<br>所以，普通情况下，ContentObserver并不会得到通知。<br>为了实现当底层数据改变时得到通知，需要调用setNotificationUri方法。<br>且对应的notifyForDescendents参数默认为true。</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> registerContentObserver (ContentObserver observer)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> unregisterContentObserver (ContentObserver observer)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> setNotificationUri (ContentResolver cr, Uri uri)</span><br></pre></td></tr></table></figure>
-<h2 id="监听SQLiteDatabase">监听SQLiteDatabase</h2><p>SQLiteDatabase并不提供注册ContentObserver的方法，但可以利用Cursor方法来实现监听。</p>
-<p>和上面类似，首先对于SQLiteDatabase的每一次修改都要调用ContentResolver的notifyChange方法。对于返回Cursor的方法，调用Cursor的setNotificationUri方法。</p>
-<p>其次，和上面相同。</p>
-<p>另外，完全可以通过观察者模式实现类似的监听。</p>
-<h2 id="在Loader中的使用">在Loader中的使用</h2><p>由于CursorLoader只支持ContentProvider，如果我们并没有实现ContentProvider，而是直接操纵数据库，我们可以自定义Loader。</p>
-<p>为了实现当底层数据改变时，Cursor得到通知，在查询之后发挥的Cursor上调用registerContentObserver方法，</p>
-<h2 id="总结">总结</h2><ol>
-<li>当修改数据后，调用ContentResolver的notifyChange方法通知数据改变。对于返回Cursor的方法，调用Cursor的setNotificationUri方法。<br> Uri参数可以填写唯一表示Cursor的字符串。如”content://包名/表名/…/ + “notifyChange”.</li>
-<li>当Cursor需要监听底层数据时，调用Cursor的registerContentObserver方法。</li>
-<li>ContentResolver类也包含了设置ContentObserver的方法。</li>
-</ol>
-<h2 id="参考">参考</h2><p><a href="http://kohoh1992.github.io/Cursor-Auto-Sync/" target="_blank" rel="external">http://kohoh1992.github.io/Cursor-Auto-Sync/</a></p>
-
-            
+            ContentObserver内容观察者，监听数据的改变。当数据改变时，它的onChange方法会被调用。此处的数据一般是ContentProvider，也可以是SQLiteDatabase。
+pub
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -370,10 +376,10 @@
           </div>
 
           <div class="site-state-item site-state-categories">
-            
+            <a href="/categories">
               <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分类</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -438,7 +444,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT
+    NexT.Mist
   </a>
 </div>
 
@@ -457,11 +463,28 @@
 
   
     
-    
 
   
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"willing-xyz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
 
 
+    
   
 
   
