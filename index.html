@@ -229,8 +229,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/30/实现自定义View的滚动/" itemprop="url">
-                  实现自定义View的滚动
+                <a class="post-title-link" href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/" itemprop="url">
+                  监听数据库-ContentProvider-Cursor的改变
                 </a>
               
             
@@ -240,8 +240,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-30T23:59:06+08:00" content="2015-11-30">
-              2015-11-30
+            <time itemprop="dateCreated" datetime="2015-12-01T23:13:06+08:00" content="2015-12-01">
+              2015-12-01
             </time>
           </span>
 
@@ -278,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/30/实现自定义View的滚动/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/30/实现自定义View的滚动/" itemprop="commentsCount"></span>
+                <a href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/监听数据库-ContentProvider-Cursor的改变/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -301,11 +301,12 @@
         
           <span itemprop="articleBody">
             
-            View滚动原理首先，View滚动本质上是根据View的scrollTo和scrollBy方法来进行滚动的。调用这两个方法时，改变的只是mScrollx和mScrolly的值，而x和y的并没有改变。所
+            ContentObserver内容观察者，监听数据的改变。当数据改变时，它的onChange方法会被调用。此处的数据一般是ContentProvider，也可以是SQLiteDatabase。
+pub
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/30/实现自定义View的滚动/#more" rel="contents">
+            <a class="btn" href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -369,7 +370,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
