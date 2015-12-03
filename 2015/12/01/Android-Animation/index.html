@@ -1,0 +1,833 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="动画的类型
+Property动画：可以对任意对象的属性（ObjectAnimator动画的属性要符合一定条件）进行动画。在Android 3.0（API 11）引入。
+Tween动画：可以对View对象(或其他UI)的特定属性进行动画。
+Drawable动画：可以一个接一个的显示Drawable对象，以形成动画。
+
+Property动画使用Property动画，需要提供setter方法（返回voi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Animation">
+<meta property="og:url" content="http://yoursite.com/2015/12/01/Android-Animation/index.html">
+<meta property="og:site_name" content="Willing Xyz's Blog">
+<meta property="og:description" content="动画的类型
+Property动画：可以对任意对象的属性（ObjectAnimator动画的属性要符合一定条件）进行动画。在Android 3.0（API 11）引入。
+Tween动画：可以对View对象(或其他UI)的特定属性进行动画。
+Drawable动画：可以一个接一个的显示Drawable对象，以形成动画。
+
+Property动画使用Property动画，需要提供setter方法（返回voi">
+<meta property="og:updated_time" content="2015-12-03T14:12:06.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Animation">
+<meta name="twitter:description" content="动画的类型
+Property动画：可以对任意对象的属性（ObjectAnimator动画的属性要符合一定条件）进行动画。在Android 3.0（API 11）引入。
+Tween动画：可以对View对象(或其他UI)的特定属性进行动画。
+Drawable动画：可以一个接一个的显示Drawable对象，以形成动画。
+
+Property动画使用Property动画，需要提供setter方法（返回voi">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> Android Animation | Willing Xyz's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Willing Xyz's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Are you kidding me?</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android Animation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-01T00:24:33+08:00" content="2015-12-01">
+              2015-12-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/Android基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Android基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/01/Android-Animation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/Android-Animation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="动画的类型">动画的类型</h2><ul>
+<li>Property动画：可以对任意对象的属性（ObjectAnimator动画的属性要符合一定条件）进行动画。在Android 3.0（API 11）引入。</li>
+<li>Tween动画：可以对View对象(或其他UI)的特定属性进行动画。</li>
+<li>Drawable动画：可以一个接一个的显示Drawable对象，以形成动画。</li>
+</ul>
+<h2 id="Property动画">Property动画</h2><p>使用Property动画，需要提供setter方法（返回void），如果没有提供初始值或终止值，则必须提供getter方法。</p>
+<h3 id="Property动画执行流程">Property动画执行流程</h3><ol>
+<li>根据每一个Keyframe执行下列计算</li>
+<li>根据Interpolator生成Fraction。</li>
+<li>TypeEvaluator根据Fraction生成值。</li>
+<li>设置属性的值。</li>
+</ol>
+<h3 id="Property相关类">Property相关类</h3><ul>
+<li><strong>Animator</strong>：抽象类（也就是不能通过它对对象进行动画，而是通过它的子类），对动画提供了基本的支持。</li>
+<li><strong>ValueAnimator</strong>：Animator的子类。它只会生成Interpolated和相应的属性值，可以在Animator.AnimatorUpdateListener监听器中根据值改变对象的属性。</li>
+<li><strong>ObjectAnimator</strong>：ValueAnimator的子类。它要求提供要动画的对象和属性，然后调用start后自动更新对象的属性。</li>
+<li><strong>AnimatorSet</strong>：Animator的子类。它包含一组Animator，并按照一定次序播放动画。</li>
+<li><strong>LayoutTransition</strong>：动画效果是设置给容器（ViewGroup），然而效果是通过容器存放的View来体现的。</li>
+<li><strong>TimeAnimator</strong>：ValueAnimator的子类， There is no duration, interpolation, or object value-setting with this Animator。</li>
+<li><strong>TypeEvaluator及子类</strong>：提供用于改变对象属性的值。</li>
+<li><strong>TimeInterpolator及子类</strong>：生成Fraction。</li>
+<li><strong>PropertyValuesHolder</strong>：保存属性和属性在动画过程中的取值。</li>
+<li><strong>Keyframe</strong>：表示一对时间/值（某一时刻）。它有自己的Interpolator。</li>
+<li><strong>ViewPropertyAnimator</strong>：对View对象进行动画（更简单）。</li>
+<li><strong>StateListAnimator</strong> :  根据View的状态执行不同的动画</li>
+<li><strong>AnimatorInflater</strong>: 用来加载xml动画。</li>
+</ul>
+<h3 id="Property动画的使用">Property动画的使用</h3><ul>
+<li><p><strong>ValueAnimator</strong></p>
+<ol>
+<li>实例化（构造器或of…方法）并设置相应的属性，或使用AnimatorInflater.loadAnimator加载</li>
+<li>添加AnimatorUpdateListener监听器</li>
+<li>在监听器中调用getAnimatedValue得到值，并设置为要动画的对象的属性值。</li>
+<li>在需要时调用start方法启动。</li>
+</ol>
+</li>
+<li><p><strong>ObjectAnimator</strong></p>
+<ol>
+<li>实例化（构造器或of…方法）并设置相应的属性，它要求提供要动画的对象和属性</li>
+<li>或者使用AnimatorInflater.loadAnimator加载xml动画，并调用setTarget方法设置对象</li>
+<li>在需要时调用start启动。</li>
+</ol>
+</li>
+<li><p><strong>AnimatorSet</strong></p>
+<ol>
+<li>实例化AnimatorSet，或使用AnimatorInflater.loadAnimator加载</li>
+<li>以特定顺序组合AnimatorSet</li>
+<li>在需要时调用start启动。</li>
+</ol>
+</li>
+<li><p><strong>LayoutTransition</strong></p>
+<ol>
+<li>实例化LayoutTransition并设置相应的属性</li>
+<li>给每种变化设置Animator（可以调用LayoutTransition.getAnimator得到默认的Animator）</li>
+<li>调用ViewGroup对象的setLayoutTransition设置LayoutTransition。</li>
+<li>当相应的事件发生时，动画自动运行。</li>
+<li>或者设置ViewGroup的xml属性 <code>animateLayoutChanges=&quot;true&quot;</code>以使用默认动画。</li>
+</ol>
+</li>
+<li><p><strong>ViewPropertyAnimator</strong></p>
+<ol>
+<li>调用View对象的animate返回ViewPropertyAnimator。</li>
+<li>设置要动画的属性</li>
+<li>在View显示时，自动开始动画。或者调用start立即开始动画</li>
+</ol>
+</li>
+<li><p><strong>StateListAnimator</strong></p>
+<ol>
+<li>实例化，并增加相应状态；或者调用AnimatorInflater.loadStateListAnimator加载</li>
+<li>调用View对象的setStateListAnimator设置动画</li>
+</ol>
+</li>
+</ul>
+<h3 id="Property动画的XML表示">Property动画的XML表示</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Property动画的XML文件存放位置：<span class="regexp">/res/</span>animator/filename.xml</span><br><span class="line"></span><br><span class="line">&lt; set <span class="comment">//表示AnimatorSet</span></span><br><span class="line">  <span class="string">android :</span>ordering=[<span class="string">"together"</span> | <span class="string">"sequentially"</span> ]&gt;</span><br><span class="line"></span><br><span class="line">    &lt;objectAnimator </span><br><span class="line">        <span class="string">android :</span>propertyName=<span class="string">"string"</span></span><br><span class="line">        <span class="string">android :</span>duration=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>valueFrom=<span class="string">"float | int | color"</span></span><br><span class="line">        <span class="string">android :</span>valueTo=<span class="string">"float | int | color"</span></span><br><span class="line">        <span class="string">android :</span>startOffset=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>repeatCount=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>repeatMode=[<span class="string">"repeat"</span> | <span class="string">"reverse"</span> ]</span><br><span class="line">        <span class="string">android :</span>valueType=[<span class="string">"intType"</span> | <span class="string">"floatType"</span> ]/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;animator   <span class="comment">// 表示ValueAnimator</span></span><br><span class="line">        <span class="string">android :</span>duration=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>valueFrom=<span class="string">"float | int | color"</span></span><br><span class="line">        <span class="string">android :</span>valueTo=<span class="string">"float | int | color"</span></span><br><span class="line">        <span class="string">android :</span>startOffset=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>repeatCount=<span class="string">"int"</span></span><br><span class="line">        <span class="string">android :</span>repeatMode=[<span class="string">"repeat"</span> | <span class="string">"reverse"</span> ]</span><br><span class="line">        <span class="string">android :</span>valueType=[<span class="string">"intType"</span> | <span class="string">"floatType"</span> ]/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;set&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/set&gt;</span><br><span class="line">&lt;/ set&gt;</span><br><span class="line"></span><br><span class="line">StateListAnimator： It can be defined <span class="keyword">in</span> an XML file with the &lt;selector&gt; element. Each State Animator is defined <span class="keyword">in</span> a nested &lt;item&gt; element. 和其他selector类似。</span><br></pre></td></tr></table></figure>
+<h2 id="Tween动画">Tween动画</h2><h3 id="Tween动画原理">Tween动画原理</h3><ol>
+<li>当View invalidate时，会向上传递给它的parent。</li>
+<li>当parent调用重绘时，如果发现子View有动画，则调用Animation的initialize方法让Animation根据参数初始化。</li>
+<li>然后调整子View Canvas的坐标系或透明度（根据Animation的getTransformation方法调整），然后重绘子View，这样就画出了动画的一帧</li>
+<li>如果<code>getTransformation</code>返回true，则调用invalidate继续重绘，而继续重绘导致会继续调整Canvas的坐标系或透明度（因为<code>getTransformation</code>随着时间返回的数据不同），这样就绘制出了另一帧</li>
+<li>调到第3步，直到动画完成（<code>getTransformation</code>返回false）。</li>
+</ol>
+<p>从上面可知，Tween动画并没有改变View内部的属性。</p>
+<h3 id="Tween动画相关类">Tween动画相关类</h3><ul>
+<li>Animation：抽象类。对Tween动画提供了基本支持。</li>
+<li>Animation子类：包括平移、旋转、缩放、透明度和AnimationSet。</li>
+<li>LayoutAnimationController及子类：对ViewGroup中的children进行动画。每个child的动画相同，但开始时间不同。</li>
+<li>AnimationUtils：提供实用方法、加载动画/Interpolater和一些预置动画。</li>
+<li>TimeInterpolator及子类：生成Fraction。</li>
+</ul>
+<h3 id="Tween动画的使用">Tween动画的使用</h3><ul>
+<li><p>Animation子类</p>
+<ol>
+<li>实例化，并设置相应的属性；或者使用AnimationUtils中的方法加载</li>
+<li>设置开始时间：<code>Animation.setStartTime</code>，应该通过<code>AnimationUtils.currentAnimationTimeMills</code>来表示当前毫秒，或者使用<code>Animation.START_ON_FIRST_FRAME</code>。</li>
+<li>调用View对象的setAnimation设置。</li>
+<li>或者把第2,3步替换为：调用View对象的startAnimation。</li>
+</ol>
+</li>
+<li><p>LayoutAnimationController及子类</p>
+<ol>
+<li>实例化，并设置相应属性；或者使用AnimationUtils中的方法加载</li>
+<li>调用ViewGroup对象的<code>setLayoutAnimation</code>设置。</li>
+<li>或者直接在layout文件中指定：    <code>android:layoutAnimation=&quot;@anim/list_item_layout&quot;</code>  </li>
+</ol>
+</li>
+</ul>
+<h3 id="Tween动画的xml表示">Tween动画的xml表示</h3><p>文件放在res/anim/目录下。使用文件名引用。<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">In</span> <span class="constant">Java</span>: <span class="constant">R</span>.anim.filename</span><br><span class="line"><span class="constant">In</span> <span class="constant">XML</span>: <span class="annotation">@[<span class="symbol">package:</span>]</span>anim/filename</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">// 根元素可以是&lt;alpha&gt;, &lt;scale&gt;, &lt;translate&gt;, &lt;rotate&gt;, <span class="keyword">or</span> &lt;<span class="keyword">set</span>&gt; </span><br><span class="line">// 公共属性</span><br><span class="line"><span class="label">android:</span>detachWallpaper </span><br><span class="line"><span class="label">android:</span>duration 持续时间</span><br><span class="line"><span class="label">android:</span>fillAfter 控制执行动画后，是否停留在最后一帧。默认为false</span><br><span class="line"><span class="label">android:</span>fillBefore 表示在startOffset阶段内是否使用动画的初始值. 默认为true</span><br><span class="line"><span class="label">android:</span>fillEnabled 控制fillBefore是否有效。默认为false</span><br><span class="line"><span class="label">android:</span>interpolator 插值器</span><br><span class="line"><span class="label">android:</span>repeatCount 重复次数，-<span class="number">1</span>表示无限次</span><br><span class="line"><span class="label">android:</span>repeatMode 重复模式，<span class="number">1</span>表示重新开始，<span class="number">2</span>表示反方向进行</span><br><span class="line"><span class="label">android:</span>startOffset 开始偏移量</span><br><span class="line"><span class="label">android:</span>zAdjustment </span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">set</span> xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:interpolator=<span class="string">"@[package:]anim/interpolator_resource"</span></span><br><span class="line">    android:shareInterpolator=[<span class="string">"true"</span> | <span class="string">"false"</span>] &gt;</span><br><span class="line">    &lt;alpha</span><br><span class="line">        android:fromAlpha=<span class="string">"float"</span></span><br><span class="line">        android:toAlpha=<span class="string">"float"</span> /&gt;</span><br><span class="line">    &lt;scale</span><br><span class="line">        android:fromXScale=<span class="string">"float"</span></span><br><span class="line">        android:toXScale=<span class="string">"float"</span></span><br><span class="line">        android:fromYScale=<span class="string">"float"</span></span><br><span class="line">        android:toYScale=<span class="string">"float"</span></span><br><span class="line">        android:pivotX=<span class="string">"float"</span></span><br><span class="line">        android:pivotY=<span class="string">"float"</span> /&gt;</span><br><span class="line">    &lt;translate</span><br><span class="line">        android:fromXDelta=<span class="string">"float"</span></span><br><span class="line">        android:toXDelta=<span class="string">"float"</span></span><br><span class="line">        android:fromYDelta=<span class="string">"float"</span></span><br><span class="line">        android:toYDelta=<span class="string">"float"</span> /&gt;</span><br><span class="line">    &lt;rotate</span><br><span class="line">        android:fromDegrees=<span class="string">"float"</span></span><br><span class="line">        android:toDegrees=<span class="string">"float"</span></span><br><span class="line">        android:pivotX=<span class="string">"float"</span></span><br><span class="line">        android:pivotY=<span class="string">"float"</span> /&gt;</span><br><span class="line">    &lt;<span class="keyword">set</span>&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/<span class="keyword">set</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">set</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Interpolator_xml">Interpolator xml</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别对应相应的类</span></span><br><span class="line"><span class="variable">@android:</span>anim/accelerate_decelerate_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/accelerate_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/anticipate_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/anticipate_overshoot_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/bounce_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/cycle_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/decelerate_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/linear_interpolator</span><br><span class="line"><span class="variable">@android</span>:anim/overshoot_interpolator</span><br></pre></td></tr></table></figure>
+<p>自定义Interpolator（只能修改现有的Interpolator）</p>
+<p>放在anim目录下，通过文件名引用。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">InterpolatorName</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">android:attribute_name</span>=<span class="value">"value"</span></span><br><span class="line">    /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Layout_Animation_xml">Layout Animation xml</h3><p>放在anim目录下，通过文件名引用。<br><code>&lt;layoutAnimation&gt;</code>作为根元素。</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">android:animation </span></span><br><span class="line"><span class="keyword">android:animationOrder </span><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> 分别代表正常，反序，随机</span><br><span class="line"><span class="keyword">android:delay </span>每个View之间的延迟</span><br><span class="line"><span class="keyword">android:interpolator </span>对delay的计算</span><br></pre></td></tr></table></figure>
+<h2 id="Drawable动画（Frame动画）">Drawable动画（Frame动画）</h2><p>对应AnimationDrawable类</p>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rocketAnimation = (AnimationDrawable) rocketImage.getBackground()<span class="comment">;</span></span><br><span class="line">rocketAnimation.start()<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>xml文件放在drawable目录下，通过文件名引用。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;animation-<span class="type">list</span> xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:oneshot=[<span class="string">"true"</span> | <span class="string">"false"</span>] &gt;</span><br><span class="line">    &lt;<span class="property">item</span></span><br><span class="line">        android:drawable=<span class="string">"@[package:]drawable/drawable_resource_name"</span></span><br><span class="line">        android:duration=<span class="string">"integer"</span> /&gt;</span><br><span class="line">&lt;/animation-<span class="type">list</span>&gt;</span><br></pre></td></tr></table></figure></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/30/实现自定义View的滚动/" rel="next" title="实现自定义View的滚动">
+                <i class="fa fa-chevron-left"></i> 实现自定义View的滚动
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/01/监听数据库-ContentProvider-Cursor的改变/" rel="prev" title="监听数据库-ContentProvider-Cursor的改变">
+                监听数据库-ContentProvider-Cursor的改变 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/01/Android-Animation/"
+           data-title="Android Animation" data-url="http://yoursite.com/2015/12/01/Android-Animation/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/avatar.jpg" alt="Willing Xyz" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Willing Xyz</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">此时正当修行时</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Willing-Xyz" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动画的类型"><span class="nav-number">1.</span> <span class="nav-text">动画的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Property动画"><span class="nav-number">2.</span> <span class="nav-text">Property动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Property动画执行流程"><span class="nav-number">2.1.</span> <span class="nav-text">Property动画执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Property相关类"><span class="nav-number">2.2.</span> <span class="nav-text">Property相关类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Property动画的使用"><span class="nav-number">2.3.</span> <span class="nav-text">Property动画的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Property动画的XML表示"><span class="nav-number">2.4.</span> <span class="nav-text">Property动画的XML表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tween动画"><span class="nav-number">3.</span> <span class="nav-text">Tween动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tween动画原理"><span class="nav-number">3.1.</span> <span class="nav-text">Tween动画原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tween动画相关类"><span class="nav-number">3.2.</span> <span class="nav-text">Tween动画相关类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tween动画的使用"><span class="nav-number">3.3.</span> <span class="nav-text">Tween动画的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tween动画的xml表示"><span class="nav-number">3.4.</span> <span class="nav-text">Tween动画的xml表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interpolator_xml"><span class="nav-number">3.5.</span> <span class="nav-text">Interpolator xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layout_Animation_xml"><span class="nav-number">3.6.</span> <span class="nav-text">Layout Animation xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drawable动画（Frame动画）"><span class="nav-number">4.</span> <span class="nav-text">Drawable动画（Frame动画）</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Willing Xyz</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"willing-xyz"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
