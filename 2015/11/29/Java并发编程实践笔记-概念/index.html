@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,ListView," />
+  <meta name="keywords" content="Java,Java并发编程实践,多线程," />
 
 
 
@@ -51,16 +51,46 @@
 
 
 
-<meta name="description" content="ListView优化使用convertView和ViewHolder1234567891011121314151617181920public View getView(int position, View convertView, ViewGroup parent) &amp;#123;	ViewHolder holder;	if (convertView == null) &amp;#123;		conver">
+<meta name="description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
+
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
+
+多线程带来的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ListView">
-<meta property="og:url" content="http://yoursite.com/2015/11/29/ListView/index.html">
+<meta property="og:title" content="Java并发编程实践笔记-概念">
+<meta property="og:url" content="http://yoursite.com/2015/11/29/Java并发编程实践笔记-概念/index.html">
 <meta property="og:site_name" content="Willing Xyz's Blog">
-<meta property="og:description" content="ListView优化使用convertView和ViewHolder1234567891011121314151617181920public View getView(int position, View convertView, ViewGroup parent) &amp;#123;	ViewHolder holder;	if (convertView == null) &amp;#123;		conver">
-<meta property="og:updated_time" content="2015-11-29T12:13:11.566Z">
+<meta property="og:description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
+
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
+
+多线程带来的">
+<meta property="og:updated_time" content="2015-11-29T13:12:15.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ListView">
-<meta name="twitter:description" content="ListView优化使用convertView和ViewHolder1234567891011121314151617181920public View getView(int position, View convertView, ViewGroup parent) &amp;#123;	ViewHolder holder;	if (convertView == null) &amp;#123;		conver">
+<meta name="twitter:title" content="Java并发编程实践笔记-概念">
+<meta name="twitter:description" content="并发与并行
+并发（concurrent）：多个线程在同一个CPU上交替执行。
+并行（parallel）：多个线程在各自的CPU上执行。
+
+多线程的优势
+发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。
+建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。
+异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。
+响应更灵敏的用户界面
+
+多线程带来的">
 
 
 
@@ -72,7 +102,7 @@
   };
 </script>
 
-  <title> ListView | Willing Xyz's Blog </title>
+  <title> Java并发编程实践笔记-概念 | Willing Xyz's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -212,7 +242,7 @@
             
             
               
-                ListView
+                Java并发编程实践笔记-概念
               
             
           </h1>
@@ -221,19 +251,46 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T19:29:05+08:00" content="2015-11-29">
+            <time itemprop="dateCreated" datetime="2015-11-29T21:10:36+08:00" content="2015-11-29">
               2015-11-29
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/Java多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">Java多线程</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/29/ListView/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/ListView/" itemprop="commentsCount"></span>
+                <a href="/2015/11/29/Java并发编程实践笔记-概念/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/Java并发编程实践笔记-概念/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -252,50 +309,23 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="ListView优化">ListView优化</h2><h3 id="使用convertView和ViewHolder">使用convertView和ViewHolder</h3><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> View getView(<span class="built_in">int</span> position, View convertView, ViewGroup parent) &#123;</span><br><span class="line">	ViewHolder holder;</span><br><span class="line">	<span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">		convertView = mInflater.inflate(R.layout.list_item_icon_text, <span class="keyword">null</span>);</span><br><span class="line">		holder = <span class="keyword">new</span> ViewHolder();</span><br><span class="line">		holder.<span class="built_in">text</span> = (TextView) convertView.findViewById(R.id.<span class="built_in">text</span>);</span><br><span class="line">		holder.icon = (ImageView) convertView.findViewById(R.id.icon);</span><br><span class="line">		convertView.setTag(holder);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		holder = (ViewHolder) convertView.getTag();</span><br><span class="line">	&#125;</span><br><span class="line">	holder.<span class="built_in">text</span>.setText(DATA[position]);</span><br><span class="line">	holder.icon.setImageBitmap((position &amp; <span class="number">1</span>) == <span class="number">1</span> ? mIcon1 : mIcon2);</span><br><span class="line">	<span class="keyword">return</span> convertView;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> class ViewHolder &#123;</span><br><span class="line">	TextView <span class="built_in">text</span>;</span><br><span class="line">	ImageView icon;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="更新某个ItemView">更新某个ItemView</h3><p>当Adapter的数据改变时，一般会调用notifyDataSetChanged方法，以刷新ListView。<br>但当只有某个Item改变时，可以获取该Item的View，并更新内部的View。<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">intvisiblePosition = yourListView.getFirstVisiblePosition()<span class="comment">;  </span></span><br><span class="line">View v = yourListView .getChildAt(pos - visiblePosition )<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
-<p> // 如果使用了ViewHolder机制，那么获取的View的getTag必然包括ViewHolder。<br> // 如果没有使用ViewHolder机制，那么可以调用View.findViewById方法查找。<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ViewHolder viewHolder =<span class="comment">(ViewHolder)</span>v.getTag <span class="comment">()</span>;  </span><br><span class="line"><span class="keyword">if</span><span class="comment">(viewHolder!= null)</span></span><br><span class="line">&#123;  </span><br><span class="line">   viewHolder .titleTextView.setText<span class="comment">(" 我更新了")</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="ListView焦点问题">ListView焦点问题</h2><p>ListView焦点问题 如果ListView中的Item包含focusable View，如Button，那么默认情况下，ListView不能接受到点击事件，而focusable View可以接收到（事件传递机制，如果子View得到了焦点，onTouchEvent的默认实现会返回true，那么事件就不会向上传递）。</p>
-<p>解决方法（这样，Item和Item中的View都可以接收点击事件）：</p>
-<ul>
-<li>对于每个focusable View，设置它为不能focusable，可以在xml或代码中设置。</li>
-<li>如果这样的View很多，会很繁琐。可以通过在它们的公共ViewGroup中声明android:descendantFocusability=”blocksDescendant”</li>
+        <span itemprop="articleBody"><h2 id="并发与并行">并发与并行</h2><ul>
+<li>并发（concurrent）：多个线程在同一个CPU上交替执行。</li>
+<li>并行（parallel）：多个线程在各自的CPU上执行。</li>
 </ul>
-<p>android:descentandFocusability参数的意义：</p>
-<ul>
-<li><p>This view will get focus before any of its descendants.<br>public static final int FOCUS_BEFORE_DESCENDANTS = 0x20000;</p>
-</li>
-<li><p>This view will get focus only if none of its descendants want it.<br>public static final int FOCUS_AFTER_DESCENDANTS = 0x40000;</p>
-</li>
-<li><p>This view will block any of its descendants from getting focus, even if they are focusable.<br>public static final int FOCUS_BLOCK_DESCENDANTS = 0x60000;</p>
-</li>
+<h2 id="多线程的优势">多线程的优势</h2><ul>
+<li>发挥多处理器的强大能力（即使在单处理器上也能获得更高的吞吐率）。</li>
+<li>建模的简单性（为每个任务分配一个线程，并在需要时进行交互）。</li>
+<li>异步事件的简单处理（如服务器对每个请求创建一个线程（一般有最大线程数量的限制））。</li>
+<li>响应更灵敏的用户界面</li>
 </ul>
-<h2 id="ListView异步加载">ListView异步加载</h2><p>在异步加载数据时，由于ItemView会滚出屏幕，然后被其他行重用，导致数据错位。<br>在显示ItemView时，如果重用了之前的View，且数据加载很慢，导致首先显示复用View的数据，然后显示加载的数据。<br>出现上面问题的原因在于重用了之前的View，并且重用了之前View绑定的数据。</p>
-<h3 id="图片有三个存放位置">图片有三个存放位置</h3><ol>
-<li>内存（内存也可分为两级，一级为强引用，一级为软引用，使用LruCache实现）</li>
-<li>硬盘（使用DiskLruCache实现）</li>
-<li>网络</li>
-</ol>
-<p>二级内存的实现（LruCache）：</p>
-<p>第一级内存使用强引用，第二级内存使用软引用。<br>并且，第一级内存扩展LruCache类，并重载entryRemoved方法，该方法被调用表示元素被移除，那么把它加入到第二季内存中。 </p>
-<h3 id="异步加载图片及其优化">异步加载图片及其优化</h3><ol>
-<li>在getView中首先设置默认加载图片</li>
-<li>设置View的tag为新的url，并首先从内存加载数据，如果没有找到，从软引用中查找，最后，则启动异步任务加载</li>
-<li>在异步任务中，首先从硬盘加载数据，如果没有找到，则从网络加载数据</li>
-<li>如果加载数据不为null，把加载的数据依次存放在硬盘缓冲和内存缓冲中，并更新UI。</li>
-<li>这个时候就要判断View是否可见。如果不可见，则不更新；否则更新。为了在postExecute中获取url相关的view，可以通过ListView的findViewWithTag方法获取，tag即为上一步设置的url。</li>
-<li>另外，当滚动时（可通过ListView的OnScrollListener监听器监听），只从内存加载数据，不从网络加载；</li>
-<li>可以使用线程池加载数据</li>
-</ol>
-<h3 id="实现代码">实现代码</h3><p><a href="https://github.com/Willing-Xyz/imageasyncload" target="_blank" rel="external">具体实现代码</a></p>
-<h2 id="ListView分类显示">ListView分类显示</h2><ol>
-<li><p>重载以下方法</p>
-<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据position返回View的类型</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> getItemViewType (<span class="keyword">int</span> position)  </span><br><span class="line"><span class="comment">// 返回类型的数量</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> getViewTypeCount ()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重载getView方法，根据不同的类型，提供不同的View</p>
-</li>
-<li>其余部分逻辑上的普通ListView类似</li>
-</ol>
+<h2 id="多线程带来的风险">多线程带来的风险</h2><ul>
+<li>安全性：产生正确的结果</li>
+<li>活跃性：正确的结果最终会发生（如死锁）</li>
+<li>性能：正确的结果尽快发生</li>
+</ul>
+<h2 id="最低安全性">最低安全性</h2><p>当线程在没有同步的情况下读取变量时，可能是一个失效值，但至少这个值是由之前某个线程设置的值，而不是一个随机值。</p>
+<p>最低安全性适用于大多数变量，但存在一个例外：非volatile类型的64位数值变量（double和long）。使用volatile可以保证它们的最低安全性。</p>
 </span>
       
     </div>
@@ -304,9 +334,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/ListView/" rel="tag">#ListView</a>
+            <a href="/tags/Java并发编程实践/" rel="tag">#Java并发编程实践</a>
+          
+            <a href="/tags/多线程/" rel="tag">#多线程</a>
           
         </div>
       
@@ -315,16 +347,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/29/ThreadLocal/" rel="next" title="ThreadLocal">
-                <i class="fa fa-chevron-left"></i> ThreadLocal
+              <a href="/2015/11/29/ListView/" rel="next" title="ListView">
+                <i class="fa fa-chevron-left"></i> ListView
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/29/Java并发编程实践笔记-概念/" rel="prev" title="Java并发编程实践笔记-概念">
-                Java并发编程实践笔记-概念 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/11/29/Java并发编程实践笔记-线程安全/" rel="prev" title="Java并发编程实践笔记-线程安全">
+                Java并发编程实践笔记-线程安全 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -352,8 +384,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/29/ListView/"
-           data-title="ListView" data-url="http://yoursite.com/2015/11/29/ListView/">
+      <div class="ds-thread" data-thread-key="2015/11/29/Java并发编程实践笔记-概念/"
+           data-title="Java并发编程实践笔记-概念" data-url="http://yoursite.com/2015/11/29/Java并发编程实践笔记-概念/">
       </div>
     
   </div>
@@ -453,7 +485,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView优化"><span class="nav-number">1.</span> <span class="nav-text">ListView优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用convertView和ViewHolder"><span class="nav-number">1.1.</span> <span class="nav-text">使用convertView和ViewHolder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新某个ItemView"><span class="nav-number">1.2.</span> <span class="nav-text">更新某个ItemView</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView焦点问题"><span class="nav-number">2.</span> <span class="nav-text">ListView焦点问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView异步加载"><span class="nav-number">3.</span> <span class="nav-text">ListView异步加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图片有三个存放位置"><span class="nav-number">3.1.</span> <span class="nav-text">图片有三个存放位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步加载图片及其优化"><span class="nav-number">3.2.</span> <span class="nav-text">异步加载图片及其优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.3.</span> <span class="nav-text">实现代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView分类显示"><span class="nav-number">4.</span> <span class="nav-text">ListView分类显示</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发与并行"><span class="nav-number">1.</span> <span class="nav-text">并发与并行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程的优势"><span class="nav-number">2.</span> <span class="nav-text">多线程的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程带来的风险"><span class="nav-number">3.</span> <span class="nav-text">多线程带来的风险</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最低安全性"><span class="nav-number">4.</span> <span class="nav-text">最低安全性</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
